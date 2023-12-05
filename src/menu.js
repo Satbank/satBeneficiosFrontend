@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 import { Box } from "@mui/material";
 import { AvatarAppBar } from "./components";
 import { useFirstRenderEffect } from "./useFirstRenderEffect";
-import UserDataService from "./services/UserDateService";
+import {UserDataService} from "./services";
 import { saveUser } from "./store/actions/LoginAction"
 
 

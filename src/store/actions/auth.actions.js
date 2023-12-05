@@ -64,7 +64,7 @@ export const login = (credentials) => {
     return Http.post("/oauth/token", {
       grant_type: "password",
       client_id: "2",
-      client_secret: "blrV0QTjo1voaPA2HugnVikE0x8rc0DJpCCf7zOE",
+      client_secret: "uGYBA6SIl8Gn43SO6lNDL7ON3PXOVOj1tx9hNw4n",
       username: credentials.username,
       password: credentials.password,
     })

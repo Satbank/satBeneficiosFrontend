@@ -2,7 +2,6 @@ import { ThemeProvider } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from './routers/router';
 import { Provider } from "react-redux";
-import './Global.css';
 import './utils/TraducoesYup'
 
 

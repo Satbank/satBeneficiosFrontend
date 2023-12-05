@@ -1,4 +1,4 @@
-import { Http } from "../conf/GlobalConf";
+import { Http } from "../../conf/GlobalConf";
 
 class UserDataService {
   static async create(obj) {

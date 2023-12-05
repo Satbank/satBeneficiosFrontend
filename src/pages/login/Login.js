@@ -15,8 +15,8 @@ import { isAuthenticated } from '../../utils/AuthHelp';
 
 const schema = yup
     .object({
-        username: yup.string().email().required(),
-        password: yup.string().required().min(5),
+        username: yup.string().email().required('obrigatorio'),
+        password: yup.string().required('campo obrigatorio').min(5,'a senha tem que ter pelo menos 5 caracteries'),
     })
 
 export default function Login() {

@@ -17,11 +17,11 @@ const PerfilsMenu = [
       submenu: [
         {
           name: "Cadastrar Nova",
-          submenuRoute: "#",
+          submenuRoute: "casdastroEmpresas",
         },
         {
           name: "Todas Empresas",
-          submenuRoute: "#",
+          submenuRoute: "todasEmpresas",
         },
       ],
     },

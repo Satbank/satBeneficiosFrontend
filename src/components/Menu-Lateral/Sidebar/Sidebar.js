@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 import * as React from "react";
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, styled, Collapse, } from "@mui/material";
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, styled, Collapse, Link, } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { connect } from "react-redux";
 import Logo from "../../../image/logomarca.png";
@@ -67,7 +67,7 @@ const Sidebar = (props) => {
               return (
                 <ListItem key={p.name} disablePadding>
                   <ListItemButton
-                    component="a"
+                    component={Link}
                     href={p.route}
                     onClick={() => handleClickMenu(index)}
                   >
@@ -95,7 +95,7 @@ const Sidebar = (props) => {
                           key={menu.name}
                         >
                           <List component="div" disablePadding>
-                            <ListItemButton component="a" href={menu.submenuRoute}>
+                            <ListItemButton component={Link} href={menu.submenuRoute}>
                               <ListItemText primary={menu.name} />
                             </ListItemButton>
                           </List>
