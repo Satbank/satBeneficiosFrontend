@@ -1,0 +1,17 @@
+/* Barra de rolagem para navegadores WebKit (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px!important; /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1C2335 !important; /* Cor da parte móvel da barra de rolagem */
+}
+
+/* Barra de rolagem para navegadores Firefox (Mozilla) */
+::-moz-scrollbar {
+  width: 8px; /* Largura da barra de rolagem */
+}
+
+::-moz-scrollbar-thumb {
+  background-color: #1C2335 !important; /* Cor da parte móvel da barra de rolagem */
+}

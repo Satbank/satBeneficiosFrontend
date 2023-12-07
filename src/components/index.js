@@ -5,10 +5,11 @@ import Confirm from "./Confirm/Confirm";
 import AvatarAppBar  from "./Menu-Lateral/AppBar/AppBar";
 import ProgressBar from "./CircularProgress/ProgressBar"
 import CircularIndeterminate from './CircularProgress/ProgressBar'
+import TableComponet from "./TableComponent/TableComponet";
 
 
 
 
 export{
-    Loading, Notify, Alert, Confirm, AvatarAppBar, ProgressBar, CircularIndeterminate
+    Loading, Notify, Alert, Confirm, AvatarAppBar, ProgressBar, CircularIndeterminate, TableComponet
 }

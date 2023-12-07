@@ -1,18 +1,18 @@
 import { Http } from "../../conf/GlobalConf";
 
-class EmpresaService {
+class ClientesService {
   static async create(obj) {
     let res = null;
 
-    await Http.post("/api/comercio", obj).then((response) => {
+    await Http.post("/api/cliente", obj).then((response) => {
       res = response.data;
     });
 
     return res;
   }
-  static async getEmpresas() {
+  static async getClientes() {
     let res = null;
-    await Http.get("/api/comercio").then((response) => {
+    await Http.get("/api/cliente").then((response) => {
       res = response.data; 
       console.log(res)  
   
@@ -23,7 +23,7 @@ class EmpresaService {
   static async edit(id) {
     let res = null;
 
-    await Http.get(`/api/comercio/${id}`).then((response) => {
+    await Http.get(`/api/cliente/${id}`).then((response) => {
       res = response.data;     
     
     });
@@ -37,7 +37,7 @@ class EmpresaService {
       categoria: categoria,
     };
   
-    await Http.put(`/api/comercio/${id}`, data).then((response) => {
+    await Http.put(`/api/cliente/${id}`, data).then((response) => {
       res = response.data;
     });
   
@@ -48,11 +48,11 @@ class EmpresaService {
     let res = null;
   
 
-    await Http.delete(`/api/comercio/${id}`).then((response) => {
+    await Http.delete(`/api/cliente/${id}`).then((response) => {
       res = response.data;
     });
   
     return res;
   }
 }
-export default EmpresaService;
+export default ClientesService;

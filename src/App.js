@@ -3,6 +3,8 @@ import { BrowserRouter } from "react-router-dom";
 import { AppRoutes } from './routers/router';
 import { Provider } from "react-redux";
 import './utils/TraducoesYup'
+import './Global.css';
+
 
 
 
