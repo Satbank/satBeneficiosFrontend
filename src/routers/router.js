@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import PrivateRoute from './privateRoute';
 import { Dashboard, Login, CadastroEmpresas,  TableEmpresas, CadastroClientes, TableClientes } from '../pages';
@@ -12,10 +12,14 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-         <Route path="/login" element={<Login />} />
+         <Route path="/" element={<Login />} />
          <Route path="/dashboard" element={Private(<Dashboard />)} />
-         <Route path="/casdastroEmpresas" element={Private(<CadastroEmpresas />)} />
+
+         <Route path="/empresas" element={Private(<CadastroEmpresas />)} />
+         <Route path="/cadastroEmpresas" element={Private(<CadastroEmpresas />)} />
          <Route path="/todasEmpresas" element={Private(<TableEmpresas />)} />
+
+         <Route path="/clientes" element={Private(<CadastroClientes />)} />
          <Route path="/cadastroClientes" element={Private(<CadastroClientes />)} />
          <Route path="/todosClientes" element={Private(<TableClientes />)} />
       {/* <Route path="*" element={<Navigate to="/login" />} /> */}

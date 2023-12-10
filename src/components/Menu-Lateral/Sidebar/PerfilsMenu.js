@@ -12,16 +12,16 @@ const PerfilsMenu = [
     {
       name: "Empresas",
       icon: Business,
-      route: "#",
+      route: "#", // Rota principal
       isSubmenu: true,
       submenu: [
         {
           name: "Cadastrar Nova",
-          submenuRoute: "casdastroEmpresas",
+          submenuRoute: "/cadastroEmpresas", // Rota do submenu
         },
         {
           name: "Todas Empresas",
-          submenuRoute: "todasEmpresas",
+          submenuRoute: "/todasEmpresas", // Rota do submenu
         },
       ],
     },
@@ -33,11 +33,11 @@ const PerfilsMenu = [
       submenu: [
         {
           name: " Novo Cliente",
-          submenuRoute: "cadastroClientes",
+          submenuRoute: "/cadastroClientes",
         },
         {
           name: "Todos Clientes",
-          submenuRoute: "todosClientes ",
+          submenuRoute: "/todosClientes ",
         },
       ],
     },

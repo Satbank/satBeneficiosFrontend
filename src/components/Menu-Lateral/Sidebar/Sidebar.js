@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 import * as React from "react";
-import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, styled, Collapse, Link, } from "@mui/material";
+import { Link as RouterLink } from 'react-router-dom';
+import { Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Box, styled, Collapse,  Divider, } from "@mui/material";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
 import { connect } from "react-redux";
 import Logo from "../../../image/logomarca.png";
@@ -58,6 +59,7 @@ const Sidebar = (props) => {
           <img src={Logo} alt="Logo" style={{ width: '100%' }} />
         </Box>
       </DrawerHeader>
+      <Divider />
       <Box sx={{ overflow: "auto" }}>
         {user.id ? (
           <List>
@@ -67,8 +69,8 @@ const Sidebar = (props) => {
               return (
                 <ListItem key={p.name} disablePadding>
                   <ListItemButton
-                    component={Link}
-                    href={p.route}
+                    component={RouterLink} 
+                    to={p.route} 
                     onClick={() => handleClickMenu(index)}
                   >
                     <ListItemIcon>
@@ -95,7 +97,10 @@ const Sidebar = (props) => {
                           key={menu.name}
                         >
                           <List component="div" disablePadding>
-                            <ListItemButton component={Link} href={menu.submenuRoute}>
+                            <ListItemButton 
+                                component={RouterLink} 
+                                to={menu.submenuRoute} 
+                            >
                               <ListItemText primary={menu.name} />
                             </ListItemButton>
                           </List>
