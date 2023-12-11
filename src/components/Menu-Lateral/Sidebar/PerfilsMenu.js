@@ -1,4 +1,4 @@
-import { Home, Business, GroupAdd } from "@mui/icons-material";
+import { Home, Business, GroupAdd, AddCard } from "@mui/icons-material";
 
 const PerfilsMenu = [
   // admin
@@ -38,6 +38,22 @@ const PerfilsMenu = [
         {
           name: "Todos Clientes",
           submenuRoute: "/todosClientes ",
+        },
+      ],
+    },
+    {
+      name: "Cartões",
+      icon: AddCard ,
+      route: "#",
+      isSubmenu: true,
+      submenu: [
+        {
+          name: " Novo cartão",
+          submenuRoute: "/cadastroCartoes",
+        },
+        {
+          name: "Todos Cartões",
+          submenuRoute: "/todosCartao ",
         },
       ],
     },

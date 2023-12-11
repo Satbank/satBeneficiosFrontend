@@ -1,4 +1,4 @@
-import { Box, Paper} from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import React, { useState } from 'react';
 import { TableComponet } from '../../components';
 import { changeloading } from '../../store/actions/loading.action';
@@ -91,62 +91,44 @@ const headers = [
 ];
 
 function TableClientes() {
+
   const [clientes, setClientes] = useState([])
-  const [mounted, setMounted] = useState(true);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [totalPage, setTotalPages] = useState(0);
 
-//  função que faz a busca no backend para tabela de clientes 
-  async function getClientes() {
-    const res = await ClientesService.getClientes();
-  
-    if (res) {
-      setClientes(res.clientes);
-    }
-  }
-  
-  React.useEffect(() => {
-    const fetchData = async () => {
-      dispatch(
-        changeloading({
-          open: true,
-          msg: "Carregando",
-        })
-      );
-  
-      if (mounted) {
-        await getClientes();
-  
-        dispatch(
-          changeloading({
-            open: false,
-          })
-        );
-      }
-    };
-  
-    fetchData();
-    return () => {
-      setMounted(false);
-    };
-  }, [dispatch, mounted]);
-  
+  const dispatch = useDispatch();  
 
- 
   return (
-   <Box component={Paper}>
-     <TableComponet
+    <Box component={Paper}>
+      <TableComponet
         headers={headers}
         data={clientes}
         labelCaption={'Nenhum cliente encontrado!!'}
         labelTable={'Clientes'}
         handlerEditarAction={''}
-        handlerDeletarAction={''}      
-     />
-   </Box>
+        handlerDeletarAction={''}
+        request
+        qdtPage={totalPage}
+        loading={loading}
+        setData={setClientes}
+        handlerRequest={async (page, size) => {
+          setLoading(true)
+          ClientesService.getClientes('', page, size).then(
+            (data) => {              
+              setLoading(false)
+              setClientes(data.clientes || [])
+              setTotalPages(data.totalPages || 0);
+              return data
+            },
+          )
+          return []
+        }}
+      />
+    </Box>
 
   );
- 
-  
+
+
 
 }
 

@@ -10,48 +10,58 @@ class ClientesService {
 
     return res;
   }
-  static async getClientes() {
+
+  static async getClientes(searchString, page = 1, pageSize = 5) {
     let res = null;
-    await Http.get("/api/cliente").then((response) => {
-      res = response.data; 
-      console.log(res)  
-  
+    const params = searchString
+      ? { params: { search: searchString, page, pageSize } }
+      : { params: { page, pageSize } };
+
+    try {
+      const response = await Http.get("/api/cliente", params);
+      res = response.data;
      
-    });
+    } catch (error) {
+      // Lida com erros, se necessário
+     
+    }
+
     return res;
   }
+
+
   static async edit(id) {
     let res = null;
 
     await Http.get(`/api/cliente/${id}`).then((response) => {
-      res = response.data;     
-    
+      res = response.data;
+
     });
     return res;
   }
   static async Update(id, categoria) {
     let res = null;
-  
+
     const data = {
       id: id,
       categoria: categoria,
     };
-  
+
     await Http.put(`/api/cliente/${id}`, data).then((response) => {
       res = response.data;
     });
-  
+
     return res;
   }
 
   static async Delete(id) {
     let res = null;
-  
+
 
     await Http.delete(`/api/cliente/${id}`).then((response) => {
       res = response.data;
     });
-  
+
     return res;
   }
 }

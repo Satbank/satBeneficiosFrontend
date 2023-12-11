@@ -31,8 +31,8 @@ const Light = createTheme({
     },
     h2: {
       fontWeight: 600,
-      fontSize: '2rem',
-       color:grey[700]
+      fontSize: '45px !important',
+       color:grey[100]
     },
     h3: {
       fontWeight: 600,

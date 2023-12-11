@@ -68,7 +68,7 @@ function CadastroClientes() {
           changeNotify({
             open: true,
             class: "error",
-            msg: 'Erro ao cadastrar cliente !'
+            msg: error.message
           })
         );
       });
@@ -77,7 +77,7 @@ function CadastroClientes() {
   return (
     <Box>
       <Box component={Paper} padding={2}>
-        <Typography variant='h2' sx={{ fontSize: '30px!important' }}>Cadastrar Novo Cliente </Typography>
+        <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Cadastrar Novo Cliente </Typography>
       </Box>
       <Box component={Paper} sx={{ flexGrow: 1, backgroundColor: '#D9D9D9' }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
         <form onSubmit={onSubmit(handleSubmit)}>
