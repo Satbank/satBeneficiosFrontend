@@ -32,7 +32,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 const Sidebar = (props) => {
   const { open, user } = props;
-  const perfil = user.perfil_id - 1;
+  const perfil = user.perfils_id - 1;
   const [isExpand, setIsExpand] = React.useState(999);
 
   const handleClickMenu = (index) => {

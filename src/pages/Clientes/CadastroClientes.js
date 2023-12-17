@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-import {  MaskCpf,  MaskPhone } from '../../utils/mascaras';
+import {  MaskCpf,  MaskNome,  MaskPhone } from '../../utils/mascaras';
 import { changeloading } from '../../store/actions/loading.action';
 import { changeNotify } from '../../store/actions/notify.actions';
 import { PrefeituraService } from '../../services';
@@ -15,10 +15,13 @@ import ClientesService from '../../services/clientes/ClientesService';
 
 const schema = yup.object({
   nome: yup.string().required('O campo é obrigatório!').min(3,'no minimo 3 caracteres'),
+  email: yup.string().required('O campo é obrigatório!').email(),
+  senha: yup.string().required('O campo é obrigatório!'), 
   cpf: yup.string().required('O campo é obrigatório!'), 
   telefone: yup.string().required('O campo é obrigatório! ex: 62999999999' ),
   cidade: yup.string().min(3),
-  uf: yup.string().max(2,'maximo 2 caracteres ex: GO')
+  uf: yup.string().max(2,'maximo 2 caracteres ex: GO'),
+  prefeitura_id: yup.string().required('O campo é obrigatório!'),
 });
 
 
@@ -63,12 +66,13 @@ function CadastroClientes() {
         reset(); 
       })
       .catch((error) => {
+        console.log(error)
         dispatch(changeloading({ open: false }));
         dispatch(
           changeNotify({
             open: true,
             class: "error",
-            msg: error.message
+            msg: error.response.data.message
           })
         );
       });
@@ -82,6 +86,7 @@ function CadastroClientes() {
       <Box component={Paper} sx={{ flexGrow: 1, backgroundColor: '#D9D9D9' }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
         <form onSubmit={onSubmit(handleSubmit)}>
           <Grid container spacing={2} alignItems="center" justify="center">
+
             <Grid item xs={12} md={5}>
               <TextField
                 label='Nome'
@@ -90,11 +95,13 @@ function CadastroClientes() {
                 fullWidth
                 {...register("nome")}
                 size="small"
+                onInput={(e) => {
+                  e.target.value = MaskNome(e.target.value);
+                  setValue("nome", e.target.value, { shouldValidate: true });
+                }}
               />
               <Typography variant='subtitle2'>{errors?.nome?.message}</Typography>
-            </Grid>
-
-           
+            </Grid>          
 
             <Grid item xs={6} md={4}>
               <TextField
@@ -112,7 +119,6 @@ function CadastroClientes() {
               <Typography variant='subtitle2'>{errors?.cpf?.message}</Typography>
             </Grid>
 
-          
             <Grid item xs={6} md={3}>
               <TextField
                 label='Telefone'
@@ -139,6 +145,7 @@ function CadastroClientes() {
                 {...register('email')}
                 size='small'
               />
+               <Typography variant='subtitle2'>{errors?.email?.message}</Typography>
             </Grid>
 
             <Grid item xs={12} md={4}>
@@ -151,10 +158,10 @@ function CadastroClientes() {
                 {...register('senha')}
                 size='small'
               />
+                <Typography variant='subtitle2'>{errors?.senha?.message}</Typography>
             </Grid>
 
             <Grid item xs={12} md={4}>
-
               <Select
                 label='prefeitura'
                 id='prefeitura_id'
@@ -173,9 +180,9 @@ function CadastroClientes() {
                   <MenuItem key={prefeitura.id} value={prefeitura.id}>
                     {prefeitura.razao_social}
                   </MenuItem>
-                ))}
+                ))}                
               </Select>
-
+              <Typography variant='subtitle2'>{errors?.prefeitura_id?.message}</Typography>
 
             </Grid>
 
@@ -252,11 +259,13 @@ function CadastroClientes() {
               <Typography variant='subtitle2'>{errors?.uf?.message}</Typography>
 
             </Grid>
+
             <Grid item xs={12} md={12}>
               <Box marginTop={2} textAlign="center">
                 <Button type='submit' variant='contained' sx={{ width: '40%' }} >Enviar</Button>
               </Box>
             </Grid>
+            
           </Grid>
         </form>
       </Box>

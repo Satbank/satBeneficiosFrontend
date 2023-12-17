@@ -11,14 +11,14 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import { MaskCartao, MaskDate, MaskValor } from '../../utils/mascaras';
 import { changeloading } from '../../store/actions/loading.action';
 import { changeNotify } from '../../store/actions/notify.actions';
-import { PrefeituraService } from '../../services';
+import { CartaoService } from '../../services';
 import ClientesService from '../../services/clientes/ClientesService';
 import { useDebounce } from '../../hooks/UseDebounce';
 
 const schema = yup.object({
   users_id: yup.string().required('O campo é obrigatório!').min(3, 'no minimo 3 caracteres'),
   numero_cartao: yup.string().required('O campo é obrigatório!').min(16, 'no minimo 16 caracteres'),
-  tipo: yup.string().required('O campo é obrigatório! ex: 62999999999'),
+  tipo_cartao: yup.string().required('O campo é obrigatório!'),
   status: yup.string(),
 });
 
@@ -74,36 +74,37 @@ function CadastroCartoes() {
 
 
   function handleSubmit(data) {
-   let newData = {...data, users_id:selectedId}
-   console.log(newData)
-    //   dispatch(
-    //     changeloading({
-    //       open: true,
-    //       msg: "carregando..."
-    //     })   
-    //   );
-    //   ClientesService.create(data)
-    //     .then((res) => {   
-    //       dispatch(changeloading({ open: false }));
-    //       dispatch(
-    //         changeNotify({
-    //           open: true,
-    //           class: "success",
-    //           msg: 'Cliente cadastrado com sucesso !'
-    //         })
-    //       );
-    //       reset(); 
-    //     })
-    //     .catch((error) => {
-    //       dispatch(changeloading({ open: false }));
-    //       dispatch(
-    //         changeNotify({
-    //           open: true,
-    //           class: "error",
-    //           msg: 'Erro ao cadastrar cliente !'
-    //         })
-    //       );
-    //     });
+    let newData = { ...data, users_id: selectedId }
+
+    dispatch(
+      changeloading({
+        open: true,
+        msg: "carregando..."
+      })
+    );
+    CartaoService.create(newData)
+      .then((res) => {
+        dispatch(changeloading({ open: false }));
+        dispatch(
+          changeNotify({
+            open: true,
+            class: "success",
+            msg: 'Cartão cadastrado com sucesso !'
+          })
+        );
+        reset();
+      })
+      .catch((error) => {
+        dispatch(changeloading({ open: false }));
+        console.log(error)
+        dispatch(
+          changeNotify({
+            open: true,
+            class: "error",
+            msg: error.response.data.error
+          })
+        );
+      });
   };
 
   return (
@@ -115,40 +116,36 @@ function CadastroCartoes() {
         <Typography marginBottom={2} variant='h2'>Cartão</Typography>
         <form onSubmit={onSubmit(handleSubmit)}>
           <Grid container spacing={2} alignItems="center" justify="center">
-
-
             <Grid item xs={12} md={6}>
-              <Grid item xs={12} md={6}>
-                <Autocomplete
-                  openText='Abrir'
-                  closeText='Fechar'
-                  noOptionsText='Sem opções'
-                  loadingText='Carregando...'
-                  disablePortal
-                  loading={isLoading}
-                  options={optionsCliente}
-                  onChange={(_, newValue) => {
-                    console.log('aqui new', newValue)
-                    setSelectedId(newValue?.id);setBusca('');}}
+              <Autocomplete
+                openText='Abrir'
+                closeText='Fechar'
+                noOptionsText='Sem opções'
+                loadingText='Carregando...'
+                disablePortal
+                loading={isLoading}
+                options={optionsCliente}
+                onChange={(_, newValue) => {
+                  setSelectedId(newValue?.id); setBusca('');
+                }}
+                onInputChange={(_, newValue) => setBusca(newValue)}
+                popupIcon={isLoading ? <CircularProgress size={28} /> : undefined}
+                value={autoCompleteSelectedOption}
 
-                  onInputChange={(_, newValue) => setBusca(newValue)}
-                  popupIcon={isLoading ? <CircularProgress size={28} /> : undefined}
-                  value={autoCompleteSelectedOption}
-
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      {...register("users_id")}
-                      label='Nome'
-                      variant='outlined'
-                      fullWidth
-                      size="small"                      
-                    />
-                  )}
-                />
-                <Typography variant='subtitle2'>{errors?.numero_cartao?.message}</Typography>
-              </Grid>
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    {...register("users_id")}
+                    label='Nome'
+                    variant='outlined'
+                    fullWidth
+                    size="small"
+                  />
+                )}
+              />
+              <Typography variant='subtitle2'>{errors?.users_id?.message}</Typography>
             </Grid>
+
 
             <Grid item xs={12} md={6}>
               <TextField
@@ -160,7 +157,7 @@ function CadastroCartoes() {
                 size="small"
                 onInput={(e) => {
                   e.target.value = MaskCartao(e.target.value);
-                  setValue("telefone", e.target.value, { shouldValidate: true });
+                  setValue("numero_cartao", e.target.value, { shouldValidate: true });
                 }}
               />
 
@@ -171,20 +168,21 @@ function CadastroCartoes() {
               <InputLabel sx={{ color: 'white' }} htmlFor='tipo'>Tipo</InputLabel>
               <Select
                 label='Tipo'
-                id='tipo'
+                id='tipo_cartao'
                 variant='outlined'
                 fullWidth
-                {...register('tipo')}
+                {...register('tipo_cartao')}
                 size='small'
                 value={tipoSelecionado}
                 onChange={(e) => {
-                  setValue('tipo', e.target.value); // Atualiza o valor usando setValue do useForm
+                  setTipoSelecionado(e.target.value); // Atualiza o estado tipoSelecionado
+                  setValue('tipo_cartao', e.target.value); // Atualiza o valor usando setValue do useForm
                 }}
               >
                 <MenuItem value={'cesta_basica'}>Cesta basica</MenuItem>
                 <MenuItem value={'esporte'}>Esporte</MenuItem>
               </Select>
-              <Typography variant='subtitle2'>{errors?.tipo?.message}</Typography>
+              <Typography variant='subtitle2'>{errors?.tipo_cartao?.message}</Typography>
             </Grid>
 
 
@@ -198,9 +196,9 @@ function CadastroCartoes() {
                 {...register("status")}
                 size="small"
                 value={status}
-                onInput={(e) => {
-                  e.target.value = e.target.value;
-                  setValue("status", e.target.value, { shouldValidate: true });
+                onChange={(e) => {
+                  setStatus(e.target.value); // Atualiza o estado status
+                  setValue("status", e.target.value); // Atualiza o valor usando setValue do useForm
                 }}
               >
                 <MenuItem value={'ativo'}>Ativo</MenuItem>

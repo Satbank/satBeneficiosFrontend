@@ -74,7 +74,7 @@ function CadastroEmpresas() {
   return (
     <Box>
       <Box component={Paper} padding={2}>
-        <Typography variant='h2' sx={{ fontSize: '30px!important' }}>Cadastrar Nova Empresa </Typography>
+        <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Cadastrar Nova Empresa </Typography>
       </Box>
       <Box component={Paper} sx={{ flexGrow: 1, backgroundColor: '#D9D9D9' }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
         <form onSubmit={onSubmit(handleSubmit)}>

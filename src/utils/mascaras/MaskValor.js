@@ -1,13 +1,15 @@
 export const MaskValor = (value) => {
-   // Remove caracteres não numéricos
-   const onlyNumbers = value.replace(/\D/g, '');
+  const onlyNumbers = value.replace(/[^\d]/g, '');
 
-   // Obtém a parte inteira e decimal
-   const intValue = onlyNumbers.slice(0, -2);
-   const decimalValue = onlyNumbers.slice(-2);
- 
-   // Formata o valor em real
-   const formattedValue = `R$ ${intValue}${intValue.length > 0 ? '.' : ''}${decimalValue}`;
+  let maskedValue = '';
+  const length = onlyNumbers.length;
 
-  return formattedValue;
+  for (let i = 0; i < length; i++) {
+    if (i === length - 2) {
+      maskedValue += ',';
+    }
+    maskedValue += onlyNumbers[i];
+  }
+
+  return maskedValue;
 };

@@ -3,7 +3,7 @@
 const initialState = {
   user: {
     id: "",
-    perfil_id: "",
+    perfils_id: "",
     nome: "",
     razao_social :"",
     email: ''

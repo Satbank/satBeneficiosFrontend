@@ -181,7 +181,7 @@ const TableComponet= ({
 
   const [page, setPage] = React.useState(0)
   const [pageLabel, setPageLabel] = React.useState(1)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const [rows, setRows] = React.useState([])
 
   function mountedRows(newData) {
@@ -275,7 +275,7 @@ const TableComponet= ({
   }
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 5))
+    setRowsPerPage(parseInt(event.target.value, 10))
     setPage(0)
   }
 
