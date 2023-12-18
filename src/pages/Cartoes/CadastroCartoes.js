@@ -96,7 +96,7 @@ function CadastroCartoes() {
       })
       .catch((error) => {
         dispatch(changeloading({ open: false }));
-        console.log(error)
+     
         dispatch(
           changeNotify({
             open: true,

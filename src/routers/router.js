@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import PrivateRoute from './privateRoute';
-import { Dashboard, Login, CadastroEmpresas,  TableEmpresas, CadastroClientes, TableClientes, CadastroCartoes, NotFound, TableCartoes, AlocarPrefeitura } from '../pages';
+import { Dashboard, Login, CadastroEmpresas,  TableEmpresas, CadastroClientes, TableClientes, CadastroCartoes, NotFound, TableCartoes, AlocarPrefeitura, AlocarClientes } from '../pages';
 
 
 function Private(component) {
@@ -26,6 +26,7 @@ export const AppRoutes = () => {
          <Route path="/todosCartoes" element={Private(<TableCartoes />)} />
 
          <Route path="/alocarPrefeitura" element={Private(<AlocarPrefeitura />)} />
+         <Route path="/alocarClientes" element={Private(<AlocarClientes />)} />
        
 
 

@@ -32,6 +32,13 @@ const headers = [
     },
   },
   {
+    id: 'nome_fantasia_prefeitura',
+    label: 'Prefeitura',
+    props: {
+      align: 'right',
+    },
+  },
+  {
     id: 'rua',
     label: 'Rua',
     props: {
@@ -91,7 +98,7 @@ function TableEmpresas() {
   async function getComercios() {
     const res = await EmpresaService.getEmpresas();
   
-    if (res) {
+    if (res) {   
       setEmpresas(res.comercios);
     }
   }

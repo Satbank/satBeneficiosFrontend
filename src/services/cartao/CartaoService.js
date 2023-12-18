@@ -11,6 +11,16 @@ class CartaoService {
     return res;
   }
 
+  static async getTipoCartao(obj) {
+    let res = null;
+
+    await Http.get("/api/tipocartao").then((response) => {
+      res = response.data;     
+    });
+
+    return res;
+  }
+
   static async getCartoes(searchString, page = 1, pageSize = 5) {
     let res = null;
     const params = searchString

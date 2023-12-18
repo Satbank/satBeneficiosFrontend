@@ -13,9 +13,7 @@ class EmpresaService {
   static async getEmpresas() {
     let res = null;
     await Http.get("/api/comercio").then((response) => {
-      res = response.data; 
-      console.log(res)  
-  
+      res = response.data;   
      
     });
     return res;

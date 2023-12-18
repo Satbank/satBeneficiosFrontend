@@ -7,6 +7,7 @@ import TableClientes from "./Clientes/TableClientes";
 import CadastroCartoes from "./Cartoes/CadastroCartoes";
 import TableCartoes from "./Cartoes/TableCartoes";
 import AlocarPrefeitura from "./AlocarValores/AlocarPrefeitura";
+import AlocarClientes from "./AlocarValores/AlocarClientes";
 import NotFound from "./NotFound/NotFound";
 
 
@@ -17,5 +18,5 @@ import NotFound from "./NotFound/NotFound";
 export{
     Login, Dashboard,  CadastroEmpresas, TableEmpresas,
      CadastroClientes, TableClientes, CadastroCartoes, TableCartoes,
-     NotFound, AlocarPrefeitura
+     NotFound, AlocarPrefeitura, AlocarClientes
 }

@@ -65,8 +65,7 @@ function CadastroClientes() {
         );
         reset(); 
       })
-      .catch((error) => {
-        console.log(error)
+      .catch((error) => {      
         dispatch(changeloading({ open: false }));
         dispatch(
           changeNotify({
