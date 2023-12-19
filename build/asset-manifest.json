@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.04a08f84.css",
+    "main.js": "/static/js/main.600b975d.js",
+    "static/media/logomarca.png": "/static/media/logomarca.af7f6e35b0029f1fc0df.png",
+    "index.html": "/index.html",
+    "main.04a08f84.css.map": "/static/css/main.04a08f84.css.map",
+    "main.600b975d.js.map": "/static/js/main.600b975d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.04a08f84.css",
+    "static/js/main.600b975d.js"
+  ]
+}
