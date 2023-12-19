@@ -89,7 +89,7 @@ const headers = [
   },
 ];
 
-function TableEmpresas() {
+function TableComercio() {
   const [empresas, setEmpresas] = useState([])
   const [mounted, setMounted] = useState(true);
   const dispatch = useDispatch();
@@ -149,4 +149,4 @@ function TableEmpresas() {
 
 }
 
-export default TableEmpresas;
+export default TableComercio;

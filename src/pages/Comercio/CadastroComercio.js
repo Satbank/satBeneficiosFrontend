@@ -22,7 +22,7 @@ const schema = yup.object({
 
 
 
-function CadastroEmpresas() {
+function CadastroComercio() {
   const { register, handleSubmit: onSubmit, formState: { errors }, setValue, reset } = useForm({ resolver: yupResolver(schema) });
 
   const dispatch = useDispatch();
@@ -286,4 +286,4 @@ function CadastroEmpresas() {
   );
 }
 
-export default CadastroEmpresas;
+export default CadastroComercio;
