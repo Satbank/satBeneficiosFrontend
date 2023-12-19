@@ -2,8 +2,7 @@ import Axios from "axios";
 import { getToken } from "../utils/AuthHelp";
 
 
-export const rootUrl = "http://127.0.0.1:8000/";
-//export const rootUrl = `https://${window.location.hostname}:443/`;
+export const rootUrl = process.env.REACT_APP_ROOT_URL
 
 export const Http = Axios.create({
   baseURL: rootUrl,

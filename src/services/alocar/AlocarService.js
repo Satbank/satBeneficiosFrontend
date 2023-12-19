@@ -7,7 +7,14 @@ class AlocarService {
     await Http.post("/api/movimentacaoPrefeitura", obj).then((response) => {
       res = response.data;
     });
+    return res;
+  }
+  static async alocarSaldoIndividual(obj) {
+    let res = null;
 
+    await Http.post("/api/movimentacaoPrefeituraCliente/alocar-valor-individual", obj).then((response) => {
+      res = response.data;
+    });
     return res;
   }
 

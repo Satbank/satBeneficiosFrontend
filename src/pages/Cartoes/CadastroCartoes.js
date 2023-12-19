@@ -4,9 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import * as yup from 'yup';
 import { useForm } from "react-hook-form"
-
 import { yupResolver } from "@hookform/resolvers/yup"
-
 
 import { MaskCartao, MaskDate, MaskValor } from '../../utils/mascaras';
 import { changeloading } from '../../store/actions/loading.action';
@@ -14,6 +12,8 @@ import { changeNotify } from '../../store/actions/notify.actions';
 import { CartaoService } from '../../services';
 import ClientesService from '../../services/clientes/ClientesService';
 import { useDebounce } from '../../hooks/UseDebounce';
+
+
 
 const schema = yup.object({
   users_id: yup.string().required('O campo é obrigatório!').min(3, 'no minimo 3 caracteres'),
@@ -35,12 +35,12 @@ function CadastroCartoes() {
   const [optionsCliente, setOptionsClientes] = useState([]);
   const [busca, setBusca] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { debounce } = useDebounce();
 
 
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.between('md', 'lg'));
-  const [isLoading, setIsLoading] = useState(false);
-  const { debounce } = useDebounce();
 
 
   let paperWidth = '40%'; // Padrão para telas grandes  
