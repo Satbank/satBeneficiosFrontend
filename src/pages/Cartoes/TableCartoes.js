@@ -22,7 +22,7 @@ const headers = [
   },
 
   {
-    id: 'saldo_disponivel',
+    id: 'saldo',
     label: 'Saldo disponivel',
     props: {
       align: 'right',
@@ -37,14 +37,14 @@ const headers = [
   },
   {
     id: 'data_emissao',
-    label: 'Numero',
+    label: 'Data emissao',
     props: {
       align: 'right',
     },
   },
   {
-    id: 'valor_alocado',
-    label: 'Bairro',
+    id: 'data_validade',
+    label: 'Validade',
     props: {
       align: 'right',
     },
@@ -83,7 +83,8 @@ function TableCartoes() {
         handlerRequest={async (page, size) => {
           setLoading(true)
           CartaoService.getCartoes('', page, size).then(
-            (data) => {              
+            (data) => {    
+              console.log('aqui saporra',data)          
               setLoading(false)
               setCartoes(data.data || [])
               setTotalPages(data.totalPages || 0);

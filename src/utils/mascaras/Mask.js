@@ -209,7 +209,7 @@ export default class Mask {
 
   static validaCpfCnpj(value) {
     let val = String(value) || "";
-    if (val.length == 14) {
+    if (val.length === 14) {
       var cpf = val.trim();
 
       cpf = cpf.replace(/\./g, "");
@@ -221,12 +221,12 @@ export default class Mask {
       var aux = false;
 
       for (var i = 1; cpf.length > i; i++) {
-        if (cpf[i - 1] != cpf[i]) {
+        if (cpf[i - 1] !== cpf[i]) {
           aux = true;
         }
       }
 
-      if (aux == false) {
+      if (aux === false) {
         return false;
       }
 
@@ -236,11 +236,11 @@ export default class Mask {
 
       v1 = (v1 * 10) % 11;
 
-      if (v1 == 10) {
+      if (v1 === 10) {
         v1 = 0;
       }
 
-      if (v1 != cpf[9]) {
+      if (v1 !== cpf[9]) {
         return false;
       }
 
@@ -250,16 +250,16 @@ export default class Mask {
 
       v2 = (v2 * 10) % 11;
 
-      if (v2 == 10) {
+      if (v2 === 10) {
         v2 = 0;
       }
 
-      if (v2 != cpf[10]) {
+      if (v2 !== cpf[10]) {
         return false;
       } else {
         return true;
       }
-    } else if (val.length == 18) {
+    } else if (val.length === 18) {
       var cnpj = val.trim();
 
       cnpj = cnpj.replace(/\./g, "");
@@ -272,12 +272,12 @@ export default class Mask {
       var aux = false;
 
       for (var i = 1; cnpj.length > i; i++) {
-        if (cnpj[i - 1] != cnpj[i]) {
+        if (cnpj[i - 1] !== cnpj[i]) {
           aux = true;
         }
       }
 
-      if (aux == false) {
+      if (aux === false) {
         return false;
       }
 
@@ -297,7 +297,7 @@ export default class Mask {
         v1 = 11 - v1;
       }
 
-      if (v1 != cnpj[12]) {
+      if (v1 !== cnpj[12]) {
         return false;
       }
 
@@ -317,7 +317,7 @@ export default class Mask {
         v2 = 11 - v2;
       }
 
-      if (v2 != cnpj[13]) {
+      if (v2 !== cnpj[13]) {
         return false;
       } else {
         return true;
@@ -335,11 +335,11 @@ export default class Mask {
     if (
       usuario.length >= 1 &&
       dominio.length >= 3 &&
-      usuario.search("@") == -1 &&
-      dominio.search("@") == -1 &&
-      usuario.search(" ") == -1 &&
-      dominio.search(" ") == -1 &&
-      dominio.search(".") != -1 &&
+      usuario.search("@") === -1 &&
+      dominio.search("@") === -1 &&
+      usuario.search(" ") === -1 &&
+      dominio.search(" ") === -1 &&
+      dominio.search(".") !== -1 &&
       dominio.indexOf(".") >= 1 &&
       dominio.lastIndexOf(".") < dominio.length - 1
     ) {
