@@ -2,7 +2,8 @@ import Axios from "axios";
 import { getToken } from "../utils/AuthHelp";
 
 
-export const rootUrl = "https://satbank.cartoessatbank.com/";
+export const rootUrl = process.env.REACT_APP_ROOT_URL;
+
 //export const rootUrl = `https://${window.location.hostname}:443/`;
 
 export const Http = Axios.create({

@@ -1,65 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import { Box, Button, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Autocomplete, Box, Button, CircularProgress, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from '@mui/material';
 
 import * as yup from 'yup';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-import { MaskValor } from '../../utils/mascaras';
+import { MaskValor } from '../../../utils/mascaras';
 import { useDispatch } from 'react-redux';
-import { changeloading } from '../../store/actions/loading.action';
-import { changeNotify } from '../../store/actions/notify.actions';
-import { AlocarPrefeituraClienteService, PrefeituraService } from '../../services';
-import AlocarValoresIndividual from './AlocarValoresIndividual';
+import { changeloading } from '../../../store/actions/loading.action';
+import { changeNotify } from '../../../store/actions/notify.actions';
+import { AlocarService, CartaoService } from '../../../services';
+import { useDebounce } from '../../../hooks/UseDebounce';
 
 
 const schema = yup.object({
-  tipo_cartao: yup.string().required('O campo é obrigatório!'),
+  
   tipo: yup.string().required('O campo é obrigatório!'),
   prefeituras_id: yup.string().required('O campo é obrigatório!'),
-  valor_movimentado_individual: yup.string().required('O campo é obrigatório!'),
+  numero_cartao: yup.string().required('O campo é obrigatório!'),
+  saldo: yup.string().required('O campo é obrigatório!'),
 });
 
 
-function AlocarClientes() {
+function AlocarValoresIndividual({ prefeituras }) {
   const { register, handleSubmit: onSubmit, formState: { errors }, setValue } = useForm({ resolver: yupResolver(schema) });
   const dispatch = useDispatch();
   const [tipoSelecionado, setTipoSelecionado] = useState('entrada');
-  const [tipo_cartaoSelecionado, setTipo_cartaoSelecionado] = useState('cesta_basica');
   const [prefeituraSelecionada, setPrefeituraSelecionada] = useState('');
-  const [prefeituras, setPrefeituras] = useState([]);
-
-
+  const [optionsCartoes, setOptionsCartoes] = useState([]);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { debounce } = useDebounce();
   const tipos = ['entrada', 'saida'];
-  const tipo_cartao = ['cesta_basica', 'esporte']
 
-  const getPrefeitura = async () => {
-    const res = await PrefeituraService.getPrefeitura();
-    if (res && res.length > 0) {
-      setPrefeituraSelecionada(res[0]);
-      setPrefeituras(res);
-    }
-  };
+
   useEffect(() => {
-    getPrefeitura();
-  }, [])
+    setIsLoading(true);
+    debounce(() => {
+      CartaoService.getCartoes(selectedOption?.label || '')
+        .then((res) => {
+          setIsLoading(false);
+          setOptionsCartoes(res.data.map(data => ({ id: data.id, label: data.numero_cartao })))
+        })
+    }, 500);
+  }, [selectedOption]);
 
-  function handleSubmit(data) {
+  const autoCompleteSelectedOption = useMemo(() => {
+    if (!selectedOption) return null;
+    const selectedOptionInList = optionsCartoes.find(option => option.label === selectedOption.label);
+    if (selectedOptionInList) return selectedOptionInList;
+    return selectedOption;
+  }, [selectedOption, optionsCartoes]);
+
+
+  function handleSubmit(data) {  
     dispatch(
       changeloading({
         open: true,
         msg: "carregando..."
       })
     );
-    AlocarPrefeituraClienteService.create(data)
+    AlocarService.alocarSaldoIndividual(data)
       .then(() => {
         dispatch(changeloading({ open: false }));
         dispatch(
           changeNotify({
             open: true,
             class: "success",
-            msg: 'Cartão cadastrado com sucesso !'
+            msg: 'Valor alocado com sucesso!'
           })
         );
       })
@@ -81,32 +90,41 @@ function AlocarClientes() {
   return (
     <Box>
       <Box component={Paper} padding={2} marginBottom={5}>
-        <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Alocar Valores para Cartões de clientes em massa</Typography>
+        <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Alocar Valores para um cartão apenas</Typography>
       </Box>
-
       <Box component={Paper} padding={4} elevation={3}>
         <form onSubmit={onSubmit(handleSubmit)}>
           <Grid container spacing={2} >
 
-            <Grid item xs={12} md={3}>
-              <InputLabel id="tipo_cartao">Selecione o tipo do cartão </InputLabel>
-              <Select
-                label='Tipo cartão'
-                id='tipo_cartao'
-                variant='outlined'
-                fullWidth
-                {...register('tipo_cartao')}
-                size='small'
-                value={tipo_cartaoSelecionado}
-                onChange={(e) => setTipo_cartaoSelecionado(e.target.value)}
-              >
-                {tipo_cartao.map((tipoCartaoOpcao) => (
-                  <MenuItem key={tipoCartaoOpcao} value={tipoCartaoOpcao}>
-                    {tipoCartaoOpcao}
-                  </MenuItem>
-                ))}
-              </Select>
-              <Typography variant='subtitle2'>{errors?.tipo_cartao?.message}</Typography>
+            <Grid item xs={12} md={3}marginTop='27px'>
+              <Autocomplete
+                openText='Abrir'
+                closeText='Fechar'
+                noOptionsText='Sem opções'
+                loadingText='Carregando...'
+                disablePortal
+                loading={isLoading}
+                options={optionsCartoes}
+                getOptionLabel={(option) => option.label}
+                value={autoCompleteSelectedOption}
+                onChange={(_, newValue) => setSelectedOption(newValue)}
+                inputValue={autoCompleteSelectedOption?.label || ''}
+                onInputChange={(_, newInputValue) => setSelectedOption({ label: newInputValue })}
+                popupIcon={isLoading ? <CircularProgress size={28} /> : undefined}
+              
+
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    {...register("numero_cartao")}
+                    label='Cartao'
+                    variant='outlined'
+                    fullWidth
+                    size="small"
+                  />
+                )}
+              />
+              <Typography variant='subtitle2'>{errors?.numero_cartao?.message}</Typography>
             </Grid>
 
 
@@ -134,17 +152,17 @@ function AlocarClientes() {
             <Grid item xs={12} md={3} marginTop='27px'>
               <TextField
                 label='R$ Valor'
-                id='valor_movimentado_individual'
+                id='saldo'
                 variant='outlined'
                 fullWidth
-                {...register("valor_movimentado_individual")}
+                {...register("saldo")}
                 size="small"
                 onInput={(e) => {
                   e.target.value = MaskValor(e.target.value);
-                  setValue("valor_movimentado_individual", e.target.value, { shouldValidate: true });
+                  setValue("saldo", e.target.value, { shouldValidate: true });
                 }}
               />
-              <Typography variant='subtitle2'>{errors?.valor_movimentado_individual?.message}</Typography>
+              <Typography variant='subtitle2'>{errors?.saldo?.message}</Typography>
             </Grid>
 
             <Grid item xs={12} md={3}>
@@ -181,13 +199,13 @@ function AlocarClientes() {
           </Grid>
         </form>
       </Box>
-      <Box marginTop={20}>
-        <AlocarValoresIndividual prefeituras={prefeituras} />
-      </Box>
+
+
+
 
     </Box>
 
   )
 }
 
-export default AlocarClientes;
+export default AlocarValoresIndividual;

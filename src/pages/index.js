@@ -1,13 +1,14 @@
 import Login from "./login/Login";
-import Dashboard from "./dashboard/Dashboard";
-import CadastroClientes from "./Clientes/CadastroClientes";
-import TableClientes from "./Clientes/TableClientes";
-import CadastroCartoes from "./Cartoes/CadastroCartoes";
-import TableCartoes from "./Cartoes/TableCartoes";
-import AlocarPrefeitura from "./AlocarValores/AlocarPrefeitura";
-import AlocarClientes from "./AlocarValores/AlocarClientes";
-import CadastroComercio from "./Comercio/CadastroComercio";
-import TableComercio from "./Comercio/TableComercio";
+import Dashboard from "./Admin/dashboard/Dashboard";
+import CadastroClientes from "./Admin/Clientes/CadastroClientes";
+import TableClientes from "./Admin/Clientes/TableClientes";
+import CadastroCartoes from "./Admin/Cartoes/CadastroCartoes";
+import TableCartoes from "./Admin/Cartoes/TableCartoes";
+import AlocarPrefeitura from "./Admin/AlocarValores/AlocarPrefeitura";
+import AlocarClientes from "./Admin/AlocarValores/AlocarClientes";
+import CadastroComercio from "./Admin/Comercio/CadastroComercio";
+import TableComercio from "./Admin/Comercio/TableComercio";
+import Vendas from "./Comercio/Vendas/Vendas";
 import NotFound from "./NotFound/NotFound";
 
 
@@ -17,5 +18,5 @@ import NotFound from "./NotFound/NotFound";
 
 export{
     Login, Dashboard, CadastroClientes, TableClientes, CadastroCartoes, TableCartoes,
-     NotFound, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio
+     NotFound, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas
 }

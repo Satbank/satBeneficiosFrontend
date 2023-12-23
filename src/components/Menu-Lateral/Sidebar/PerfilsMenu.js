@@ -74,7 +74,7 @@ const PerfilsMenu = [
       ],
     },
   ],
-  // contratante
+  // prefeitura 
   [
     {
       name: "Programação",
@@ -93,26 +93,29 @@ const PerfilsMenu = [
       ],
     },
   ],
-  // contratante
+  // comercio
   [
     {
-      name: "Inscrições",
+      name: "Dashboard",
+      icon: Home,
+      route: "/dashboard",
+      isSubmenu: false,
+    },
+    {
+      name: "Vendas",
       icon: Home,
       route: "#",
       isSubmenu: true,
       submenu: [
         {
-          name: "Entradas e Valores ",
-          submenuRoute: "",
+          name: "Nova Venda",
+          submenuRoute: "/novavenda",
         },
         {
-          name: "Formulários de inscrição",
+          name: "Relatorio de Vendas",
           submenuRoute: "",
         },
-        {
-          name: "Cupom de desconto",
-          submenuRoute: "",
-        },
+       
       ],
     },
   ],

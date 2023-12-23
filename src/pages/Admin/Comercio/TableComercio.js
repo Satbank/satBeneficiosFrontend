@@ -1,8 +1,8 @@
 import { Box, Paper} from '@mui/material';
 import React, { useState } from 'react';
-import { TableComponet } from '../../components';
-import { EmpresaService } from '../../services';
-import { changeloading } from '../../store/actions/loading.action';
+import { TableComponet } from '../../../components';
+import { EmpresaService } from '../../../services';
+import { changeloading } from '../../../store/actions/loading.action';
 import { useDispatch } from 'react-redux';
 
 

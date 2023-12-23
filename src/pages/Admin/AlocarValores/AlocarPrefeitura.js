@@ -5,12 +5,12 @@ import * as yup from 'yup';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 
-import { AlocarService, PrefeituraService } from '../../services';
-import { MaskValor } from '../../utils/mascaras';
+import { AlocarService, PrefeituraService } from '../../../services';
+import { MaskValor } from '../../../utils/mascaras';
 import { useDispatch } from 'react-redux';
-import { changeloading } from '../../store/actions/loading.action';
-import { changeNotify } from '../../store/actions/notify.actions';
-import { TableComponet } from '../../components';
+import { changeloading } from '../../../store/actions/loading.action';
+import { changeNotify } from '../../../store/actions/notify.actions';
+import { TableComponet } from '../../../components';
 
 const schema = yup.object({
   prefeituras_id: yup.string().required('O campo é obrigatório!'),

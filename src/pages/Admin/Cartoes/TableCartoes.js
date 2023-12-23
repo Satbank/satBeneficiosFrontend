@@ -1,9 +1,7 @@
 import { Box, Paper } from '@mui/material';
 import React, { useState } from 'react';
-import { TableComponet } from '../../components';
-import { ClientesService } from '../../services';
-
-
+import { TableComponet } from '../../../components';
+import { CartaoService } from '../../../services';
 
 //linhas da tabela
 const headers = [
@@ -16,62 +14,42 @@ const headers = [
 
   },
   {
-    id: "email",
-    label: "Email",
+    id: "numero_cartao",
+    label: "Cartão",
     props: {
       align: 'right',
     },
   },
 
   {
-    id: 'cpf',
-    label: 'Cpj',
+    id: 'saldo',
+    label: 'Saldo disponivel',
     props: {
       align: 'right',
     },
   },
   {
-    id: 'rua',
-    label: 'Rua',
+    id: 'status',
+    label: 'Status',
     props: {
       align: 'right',
     },
   },
   {
-    id: 'numero',
-    label: 'Numero',
+    id: 'data_emissao',
+    label: 'Data emissao',
     props: {
       align: 'right',
     },
   },
   {
-    id: 'bairro',
-    label: 'Bairro',
+    id: 'data_validade',
+    label: 'Validade',
     props: {
       align: 'right',
     },
   },
-  {
-    id: 'complemento',
-    label: 'Complemento',
-    props: {
-      align: 'right',
-    },
-  },
-  {
-    id: 'cidade',
-    label: 'Cidade',
-    props: {
-      align: 'right',
-    },
-  },
-  {
-    id: 'uf',
-    label: 'Uf',
-    props: {
-      align: 'right',
-    },
-  },  
+  
   {
     id: 'actionRows',
     label: 'Ações',
@@ -81,9 +59,9 @@ const headers = [
   },
 ];
 
-function TableClientes() {
+function TableCartoes() {
 
-  const [clientes, setClientes] = useState([])
+  const [cartoes, setCartoes] = useState([])
   const [loading, setLoading] = useState(false);
   const [totalPage, setTotalPages] = useState(0);
 
@@ -93,21 +71,22 @@ function TableClientes() {
     <Box component={Paper}>
       <TableComponet
         headers={headers}
-        data={clientes}
+        data={cartoes}
         labelCaption={'Nenhum cliente encontrado!!'}
-        labelTable={'Clientes'}
+        labelTable={'Cartoes'}
         handlerEditarAction={''}
         handlerDeletarAction={''}
         request
         qdtPage={totalPage}
         loading={loading}
-        setData={setClientes}
+        setData={setCartoes}
         handlerRequest={async (page, size) => {
           setLoading(true)
-          ClientesService.getClientes('', page, size).then(
-            (data) => {              
+          CartaoService.getCartoes('', page, size).then(
+            (data) => {    
+              console.log('aqui saporra',data)          
               setLoading(false)
-              setClientes(data.clientes || [])
+              setCartoes(data.data || [])
               setTotalPages(data.totalPages || 0);
               return data
             },
@@ -123,4 +102,4 @@ function TableClientes() {
 
 }
 
-export default TableClientes;
+export default TableCartoes;
