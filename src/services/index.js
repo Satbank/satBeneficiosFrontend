@@ -5,9 +5,11 @@ import ClientesService from "./clientes/ClientesService";
 import CartaoService from "./cartao/CartaoService";
 import AlocarService from "./alocar/AlocarService";
 import AlocarPrefeituraClienteService from "./alocar/AlocarPrefeituraClienteService";
+import Movimentacao_cliente_comercio from "./movimentacao/Movimentacao_cliente_comercio";
 
 
 export{
   UserDataService, EmpresaService, PrefeituraService, 
-  ClientesService, CartaoService, AlocarService, AlocarPrefeituraClienteService 
+  ClientesService, CartaoService, AlocarService, AlocarPrefeituraClienteService ,
+  Movimentacao_cliente_comercio
 }

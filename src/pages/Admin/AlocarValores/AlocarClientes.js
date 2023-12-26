@@ -59,7 +59,7 @@ function AlocarClientes() {
           changeNotify({
             open: true,
             class: "success",
-            msg: 'Cartão cadastrado com sucesso !'
+            msg: 'Valor alocado  com sucesso !'
           })
         );
       })

@@ -73,10 +73,10 @@ function CadastroComercio() {
 
   return (
     <Box>
-      <Box component={Paper} padding={2}>
+      <Box component={Paper}elevation={5} padding={2}>
         <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Cadastrar Nova Empresa </Typography>
       </Box>
-      <Box component={Paper} sx={{ flexGrow: 1, backgroundColor: '#D9D9D9' }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
+      <Box component={Paper} elevation={5} sx={{ flexGrow: 1,  }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
         <form onSubmit={onSubmit(handleSubmit)}>
           <Grid container spacing={2} alignItems="center" justify="center">
             <Grid item xs={12} md={6}>

@@ -10,17 +10,17 @@ const PerfilsMenu = [
       isSubmenu: false,
     },
     {
-      name: "Empresas",
+      name: "Comercio",
       icon: Business,
       route: "#", // Rota principal
       isSubmenu: true,
       submenu: [
         {
-          name: "Cadastrar Nova",
+          name: "Cadastrar Novo",
           submenuRoute: "/cadastroEmpresas", // Rota do submenu
         },
         {
-          name: "Todas Empresas",
+          name: "Todas comercios",
           submenuRoute: "/todasEmpresas", // Rota do submenu
         },
       ],
