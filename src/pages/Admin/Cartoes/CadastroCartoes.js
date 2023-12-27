@@ -25,7 +25,7 @@ const schema = yup.object({
   numero_cartao: yup.string().required('O campo é obrigatório!').min(16, 'no minimo 16 caracteres'),
   tipo_cartao: yup.string().required('O campo é obrigatório!'),
   status: yup.string(),
-  senha: yup.string().required('O campo é obrigatório!').min(6,'Deve ter no minimo 6 caracteries').max(6,'Deve ter no maximo 6 caracteries')
+  senha: yup.string().required('O campo é obrigatório!').min(6,'Deve ter no minimo 6 caracteries')
   
 });
 

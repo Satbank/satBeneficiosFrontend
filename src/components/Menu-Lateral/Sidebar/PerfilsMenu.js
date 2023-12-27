@@ -68,7 +68,7 @@ const PerfilsMenu = [
           submenuRoute: "/alocarPrefeitura",
         },
         {
-          name: "Alocar CLientes",
+          name: "Alocar Clientes",
           submenuRoute: "/alocarClientes ",
         },
       ],
@@ -77,17 +77,17 @@ const PerfilsMenu = [
   // prefeitura 
   [
     {
-      name: "Programação",
+      name: "",
       icon: Home,
       route: "#",
       isSubmenu: true,
       submenu: [
         {
-          name: "Atividades",
+          name: "",
           submenuRoute: "",
         },
         {
-          name: "Convidados",
+          name: "",
           submenuRoute: "",
         },
       ],
@@ -113,7 +113,7 @@ const PerfilsMenu = [
         },
         {
           name: "Relatorio de Vendas",
-          submenuRoute: "",
+          submenuRoute: "/relatorio/vendas",
         },
        
       ],

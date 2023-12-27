@@ -17,7 +17,7 @@ const schema = yup.object({
 });
 
 function Vendas() {
-  const { register, handleSubmit: onSubmit, formState: { errors }, setValue } = useForm({ resolver: yupResolver(schema) });
+  const { register, handleSubmit: onSubmit, formState: { errors }, setValue, reset } = useForm({ resolver: yupResolver(schema) });
   const dispatch = useDispatch();
   const isSmallScreen = useMediaQuery((theme) => theme.breakpoints.down('sm'));
   const isMediumScreen = useMediaQuery((theme) => theme.breakpoints.between('md', 'lg'));
@@ -40,7 +40,7 @@ function Vendas() {
 
 
   function handleSubmit(data) {
-    
+    console.log(data)
     dispatch(
       changeloading({
         open: true,
@@ -57,6 +57,7 @@ function Vendas() {
             msg: 'Autorizado com sucesso '
           })
         );
+        reset();
       })
       .catch((error) => {
         dispatch(changeloading({ open: false }));
@@ -65,7 +66,7 @@ function Vendas() {
           changeNotify({
             open: true,
             class: "error",
-            msg: error.response.data.error
+            msg: `${error.response.data.error}. Tentativas restantes: ${error.response.data.tentativas_restantes}`,
           })
         );
       });

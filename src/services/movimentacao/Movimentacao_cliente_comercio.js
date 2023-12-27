@@ -10,14 +10,14 @@ class Movimentacao_cliente_comercio {
     return res;
   }
 
-  static async getSaldo() {
-    let res = null;
-    await Http.get("/api/movimentacaoClienteComercio").then((response) => {
-      res = response.data;     
-       });
+  static async getRelatorios(quantidadeDias) {
+    let res = null;    
+    await Http.get(`/api/relatorioComercio?dias=${quantidadeDias}`).then((response) => {
+      res = response.data;
+    });
     return res;
   }
-
+  
   static async edit(id) {
     let res = null;
 
