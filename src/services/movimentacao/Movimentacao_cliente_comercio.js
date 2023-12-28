@@ -6,7 +6,14 @@ class Movimentacao_cliente_comercio {
     await Http.post("/api/movimentacaoClienteComercio", obj).then((response) => {
       res = response.data;
     });
-
+    return res;
+  }
+  
+  static async estornar(obj) {
+    let res = null;
+    await Http.post("/api/estorno", obj).then((response) => {
+      res = response.data;
+    });
     return res;
   }
 

@@ -1,10 +1,13 @@
-import { Box, Paper, Select, MenuItem, InputLabel, Typography, Grid, Button } from '@mui/material';
 import React, { useState } from 'react';
-import { TableComponet } from '../../../components';
+import { Box, Paper, Select, MenuItem, InputLabel, Typography, Grid, Button } from '@mui/material';
+
+
+import { Confirm, TableComponet } from '../../../components';
 import { Movimentacao_cliente_comercio } from '../../../services';
 import { useDispatch } from 'react-redux';
 import { changeloading } from '../../../store/actions/loading.action';
 import * as XLSX from 'xlsx';
+import { changeNotify } from '../../../store/actions/notify.actions';
 
 // linhas da tabela
 const headers = [
@@ -24,7 +27,14 @@ const headers = [
   },
   {
     id: 'valor',
-    label: 'Valor',
+    label: 'Valor Recebido',
+    props: {
+      align: 'left',
+    },
+  },
+  {
+    id: 'valor_original',
+    label: 'Valor Venda',
     props: {
       align: 'left',
     },
@@ -43,7 +53,15 @@ const headers = [
       align: 'left',
     },
   },
+  {
+    id: 'actionRows',
+    label: 'Estornar Venda',
+    props: {
+      align: 'right',
+    },
+  },
 ];
+
 
 function RelatorioVendas() {
 
@@ -52,6 +70,10 @@ function RelatorioVendas() {
   const [relatorios, setRelatorios] = useState([]);
   const [mounted, setMounted] = useState(true);
   const dispatch = useDispatch();
+  const [confirmar, setConfirmar] = React.useState({
+    id: null,
+    confirmDialogOpen: false,
+  });
 
   async function getRelatorios() {
     const res = await Movimentacao_cliente_comercio.getRelatorios(selectedDays);
@@ -59,6 +81,7 @@ function RelatorioVendas() {
       setRelatorios(res.relatorios);
     }
   }
+
   React.useEffect(() => {
     const fetchData = async () => {
       dispatch(
@@ -94,6 +117,27 @@ function RelatorioVendas() {
     XLSX.writeFile(wb, filename);
   };
 
+  const handleOpenConfirmDialog = (id) => {
+    setConfirmar({ id, confirmDialogOpen: true });
+  };
+
+  const handleCloseConfirmDialog = () => {
+    setConfirmar({ id: null, confirmDialogOpen: false });
+  };
+
+  const handleEstonar = async () => {    
+    try {
+      dispatch(changeloading({ open: true, msg: "estornando venda..." }));
+      await Movimentacao_cliente_comercio.estornar(confirmar.id);
+      dispatch(changeloading({ open: false }));
+      dispatch(changeNotify({ open: true, class: 'success', msg: 'Estornado com Sucesso' }));
+      handleCloseConfirmDialog();
+    } catch (error) {      
+      dispatch(changeloading({ open: false }));
+      dispatch(changeNotify({ open: true, class: 'error', msg:  error.response.data.error}));
+    }
+  };
+
   return (
     <Box>
       <Grid container spacing={2} >
@@ -103,19 +147,19 @@ function RelatorioVendas() {
           </Box>
         </Grid>
 
-        <Grid item xs={12} md={2}>
+        <Grid item xs={6} md={2}>
           <InputLabel sx={{ color: 'black', fontSize: '22px' }}>Selecionar dias</InputLabel>
-          <Select fullWidth value={selectedDays} onChange={(e) => setSelectedDays(e.target.value)}>
+          <Select fullWidth size='small' value={selectedDays} onChange={(e) => setSelectedDays(e.target.value)}>
             <MenuItem value={"1"}>Hoje</MenuItem>
             <MenuItem value={"7"}>Esta semana</MenuItem>
             <MenuItem value={"30"}>Últimos 30 dias</MenuItem>
           </Select>
         </Grid>
 
-        <Grid item xs={12} md={2} marginTop='35px'>
-          <Button fullWidth variant='contained' color='secondary' size='large' onClick={exportToExcel}>
+        <Grid item xs={6} md={2} marginTop='33px'>
+          <Button fullWidth variant='contained' color='secondary' onClick={exportToExcel}>
             exportar excel
-          </Button>          
+          </Button>
         </Grid>
 
         <Grid item xs={12} md={12}>
@@ -125,6 +169,13 @@ function RelatorioVendas() {
               data={relatorios}
               labelCaption={'Nenhuma movimentação encontrada!!'}
               labelTable={'Movimentação'}
+              handlerEstornarAction={(event) => { handleOpenConfirmDialog(event) }}
+            />
+            <Confirm
+              open={confirmar.confirmDialogOpen}
+              title="Deseja realmente estornar essa venda?"
+              onClose={handleCloseConfirmDialog}
+              onConfirm={handleEstonar}
             />
           </Box>
         </Grid>

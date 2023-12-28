@@ -12,7 +12,7 @@ import { changeNotify } from '../../../store/actions/notify.actions';
 const schema = yup.object({
   numero_cartao: yup.string().required('O campo é obrigatório!'),
   valor: yup.string().required('O campo é obrigatório!'),
-  senha: yup.string().required('O campo é obrigatório!').min(6,'a senha tem 6 caracteres').max(6,'a senha tem no maximo 6 caracteres')
+  senha: yup.string().required('O campo é obrigatório!').min(6, 'a senha tem 6 caracteres').max(6, 'a senha tem no maximo 6 caracteres')
 
 });
 
@@ -40,35 +40,16 @@ function Vendas() {
 
 
   function handleSubmit(data) {
-    console.log(data)
-    dispatch(
-      changeloading({
-        open: true,
-        msg: "carregando..."
-      })
-    );
+    dispatch(changeloading({ open: true, msg: "carregando..." }));
     Movimentacao_cliente_comercio.create(data)
       .then(() => {
         dispatch(changeloading({ open: false }));
-        dispatch(
-          changeNotify({
-            open: true,
-            class: "success",
-            msg: 'Autorizado com sucesso '
-          })
-        );
+        dispatch(changeNotify({ open: true, class: "success", msg: 'Autorizado com sucesso ' }));
         reset();
       })
       .catch((error) => {
         dispatch(changeloading({ open: false }));
-        console.log(error)
-        dispatch(
-          changeNotify({
-            open: true,
-            class: "error",
-            msg: `${error.response.data.error}. Tentativas restantes: ${error.response.data.tentativas_restantes}`,
-          })
-        );
+        dispatch(changeNotify({ open: true, class: "error", msg: error.response.data.error }));
       });
     handleModalClose();
   };

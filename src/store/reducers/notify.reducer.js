@@ -5,7 +5,7 @@ const initialState = {
     horizontal: ' center',
     vertical: 'top',
     class: 'error',
-    time: 3000,
+    time: 5000,
     msg:'',
 
 }

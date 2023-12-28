@@ -8,9 +8,7 @@ import {UserDataService} from "./services";
 import { saveUser } from "./store/actions/LoginAction"
 
 
-const Menu = (props) => {
-  
-
+const Menu = (props) => { 
   useFirstRenderEffect(() => {
     UserDataService.getUser()
       .then((data) => {

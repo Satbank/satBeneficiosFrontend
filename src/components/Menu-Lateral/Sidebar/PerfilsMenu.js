@@ -1,4 +1,4 @@
-import { Home, Business, GroupAdd, AddCard, Paid } from "@mui/icons-material";
+import { Home, Business, GroupAdd, AddCard, Paid,  SupportAgent } from "@mui/icons-material";
 
 const PerfilsMenu = [
   // admin
@@ -6,7 +6,7 @@ const PerfilsMenu = [
     {
       name: "Dashboard",
       icon: Home,
-      route: "/dashboard",
+      route: "/dashboard/admin",
       isSubmenu: false,
     },
     {
@@ -114,9 +114,15 @@ const PerfilsMenu = [
         {
           name: "Relatorio de Vendas",
           submenuRoute: "/relatorio/vendas",
-        },
+        },     
        
       ],
+    },
+    {
+      name: "Suporte",
+      icon: SupportAgent,
+      route: "",
+      isSubmenu: false,
     },
   ],
   // beneficiario

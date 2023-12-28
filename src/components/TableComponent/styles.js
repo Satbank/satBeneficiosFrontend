@@ -13,11 +13,11 @@ export const Container = styled.div`
 
   div table tbody tr th,
   div table tbody tr td {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   div table thead tr th {
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 600;
   }
 
@@ -27,7 +27,7 @@ export const Container = styled.div`
 
   div table tfoot tr td div p,
   div table tfoot tr td div button {
-    font-size: 10px;
+    font-size: 12px;
   }
   .MuiTablePagination-selectLabel {
   color: ${grey[800]};

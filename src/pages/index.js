@@ -10,6 +10,7 @@ import CadastroComercio from "./Admin/Comercio/CadastroComercio";
 import TableComercio from "./Admin/Comercio/TableComercio";
 import Vendas from "./Comercio/Vendas/Vendas";
 import RelatorioVendas from "./Comercio/Vendas/RelatorioVendas";
+
 import NotFound from "./NotFound/NotFound";
 
 
@@ -20,5 +21,5 @@ import NotFound from "./NotFound/NotFound";
 export{
     Login, Dashboard, CadastroClientes, TableClientes, CadastroCartoes, TableCartoes,
      NotFound, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas,
-     RelatorioVendas
+     RelatorioVendas, 
 }

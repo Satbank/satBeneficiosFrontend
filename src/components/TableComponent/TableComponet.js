@@ -16,6 +16,7 @@ import PlagiarismOutlinedIcon from '@mui/icons-material/PlagiarismOutlined'
 import Input from '../Input/Input'
 import StatusAction from '../Actions/StatusAction'
 import InfoAction from '../Actions/InfoAction'
+import ExtornoAction from '../Actions/ExtornoAction'
 
 function EnhancedTableToolbar(props) {
   const { numSelected, labelTable, handlerDelete, Action } = props
@@ -163,6 +164,7 @@ const TableComponet= ({
   labelCaption,
   handlerDelete,
   handlerEditarAction,
+  handlerEstornarAction,
   handlerDeletarAction,
   handlerDetalhesAction,
   ActionSelect,
@@ -247,6 +249,9 @@ const TableComponet= ({
         )}
         {handlerEditarAction && (
           <EditAction onClick={() => handlerEditarAction(row)} />
+        )}
+        {handlerEstornarAction && (
+          <ExtornoAction onClick={() => handlerEstornarAction(row)} />
         )}
         {handlerDeletarAction && (
           <DeleteAction

@@ -3,7 +3,7 @@ import { Box, Button, Grid, MenuItem, Paper, Select, TextField, Typography } fro
 import * as yup from 'yup';
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
-import { MaskCnpj, MaskInscricaoEstadual, MaskPhone } from '../../../utils/mascaras';
+import { MaskCnpj, MaskInscricaoEstadual, MaskNome, MaskPhone } from '../../../utils/mascaras';
 
 import { useDispatch } from 'react-redux';
 import { EmpresaService, PrefeituraService } from '../../../services';
@@ -16,7 +16,7 @@ const schema = yup.object({
   cnpj: yup.string().required('O campo é obrigatório!'),
   inscricao_estadual: yup.string().required('O campo é obrigatório!'),
   cidade: yup.string().min(3),
-  uf: yup.string().max(2,'maximo 2 caracteres ex: GO')
+  uf: yup.string().max(2, 'maximo 2 caracteres ex: GO')
 });
 
 
@@ -40,15 +40,15 @@ function CadastroComercio() {
     getPrefeitura();
   }, [])
 
-  function handleSubmit(data) {    
+  function handleSubmit(data) {
     dispatch(
       changeloading({
         open: true,
         msg: "carregando..."
-      })   
+      })
     );
     EmpresaService.create(data)
-      .then((res) => {   
+      .then((res) => {
         dispatch(changeloading({ open: false }));
         dispatch(
           changeNotify({
@@ -57,7 +57,7 @@ function CadastroComercio() {
             msg: 'Comercio cadastrado com sucesso !'
           })
         );
-        reset(); 
+        reset();
       })
       .catch((error) => {
         dispatch(changeloading({ open: false }));
@@ -73,10 +73,10 @@ function CadastroComercio() {
 
   return (
     <Box>
-      <Box component={Paper}elevation={5} padding={2}>
+      <Box component={Paper} elevation={5} padding={2}>
         <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Cadastrar Nova Empresa </Typography>
       </Box>
-      <Box component={Paper} elevation={5} sx={{ flexGrow: 1,  }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
+      <Box component={Paper} elevation={5} sx={{ flexGrow: 1, }} marginTop={2} padding={3} display="flex" flexDirection="column" alignItems="center">
         <form onSubmit={onSubmit(handleSubmit)}>
           <Grid container spacing={2} alignItems="center" justify="center">
             <Grid item xs={12} md={6}>
@@ -87,6 +87,10 @@ function CadastroComercio() {
                 fullWidth
                 {...register("razao_social")}
                 size="small"
+                onInput={(e) => {
+                  e.target.value = MaskNome(e.target.value);
+                  setValue("razao_social", e.target.value, { shouldValidate: true });
+                }}
               />
               <Typography variant='subtitle2'>{errors?.razao_social?.message}</Typography>
             </Grid>
@@ -99,6 +103,10 @@ function CadastroComercio() {
                 fullWidth
                 {...register("nome_fantasia")}
                 size="small"
+                onInput={(e) => {
+                  e.target.value = MaskNome(e.target.value);
+                  setValue("nome_fantasia", e.target.value, { shouldValidate: true });
+                }}
               />
               <Typography variant='subtitle2'>{errors?.nome_fantasia?.message}</Typography>
             </Grid>

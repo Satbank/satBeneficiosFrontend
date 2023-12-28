@@ -38,6 +38,26 @@ export const EditBox = styled.div`
     background-color: #11bf59 !important;
   }
 `
+export const EstornoBox = styled.div`
+  display: flex;
+  width: 30px;
+  height: 30px;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 5px;
+  margin: 1px 2px;
+  background-color: #9347AD !important;
+
+  color: white;
+
+  cursor: pointer;
+
+  :hover {
+    background-color: #7B3C91 !important;
+  }
+`
 export const DeleteBox = styled.div`
   display: flex;
   width: 30px;

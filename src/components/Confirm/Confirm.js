@@ -8,22 +8,10 @@ export default function Confirm(props) {
             open={open}
             onClose={() => onClose()} 
         >
-            <DialogTitle>{title || "Tem certeza que deseja excluir?"}</DialogTitle>
+            <DialogTitle variant='h4'>{title || "Tem certeza que deseja excluir?"}</DialogTitle>
             <DialogActions    style={{ alignSelf: 'center' }} >
-                <Button onClick={() => onClose()} color='error'>
-                    Não
-                </Button>
-                <Button
-                    onClick={() => {
-                      
-                        onConfirm();
-                    }}
-                    variant='contained'
-                    color='primary'
-                 
-                >
-                    Sim
-                </Button>
+                <Button onClick={() => onClose()} color='error'> Não </Button>
+                <Button onClick={() => {onConfirm();}} variant='contained' color='primary' > Sim </Button>
             </DialogActions>
             {/* <Confirm
     open={true}
