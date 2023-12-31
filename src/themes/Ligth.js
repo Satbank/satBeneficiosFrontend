@@ -17,7 +17,7 @@ const Light = createTheme({
     }
   },
   typography: {
-    fontFamily: "'Roboto', sans-serif",
+    fontFamily: "'Nunito', sans-serif",
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 600,

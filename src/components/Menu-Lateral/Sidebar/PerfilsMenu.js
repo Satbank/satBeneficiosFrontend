@@ -98,7 +98,7 @@ const PerfilsMenu = [
     {
       name: "Dashboard",
       icon: Home,
-      route: "/dashboard",
+      route: "/dashboard/comercio",
       isSubmenu: false,
     },
     {

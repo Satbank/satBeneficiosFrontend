@@ -11,7 +11,7 @@ import { saveUser } from "./store/actions/LoginAction"
 const Menu = (props) => { 
   useFirstRenderEffect(() => {
     UserDataService.getUser()
-      .then((data) => {
+      .then((data) => {     
         props.saveUser(data)
       })
   });

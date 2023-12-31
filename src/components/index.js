@@ -6,10 +6,13 @@ import AvatarAppBar  from "./Menu-Lateral/AppBar/AppBar";
 import ProgressBar from "./CircularProgress/ProgressBar"
 import CircularIndeterminate from './CircularProgress/ProgressBar'
 import TableComponet from "./TableComponent/TableComponet";
+import CardBemVindo from "./Cards/CardBemVindo";
+import CardAdminTotalMes from "./Cards/CardAdminTotalMes";
 
 
 
 
 export{
-    Loading, Notify, Alert, Confirm, AvatarAppBar, ProgressBar, CircularIndeterminate, TableComponet
+    Loading, Notify, Alert, Confirm, AvatarAppBar, ProgressBar, CircularIndeterminate,
+     TableComponet, CardBemVindo, CardAdminTotalMes
 }

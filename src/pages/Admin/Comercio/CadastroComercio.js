@@ -30,10 +30,21 @@ function CadastroComercio() {
   const [prefeituras, setPrefeituras] = useState([]);
 
   const getPrefeitura = async () => {
-    const res = await PrefeituraService.getPrefeitura();
-    if (res && res.length > 0) {
-      setPrefeituraSelecionada(res[0]);
-      setPrefeituras(res);
+    try {
+      const res = await PrefeituraService.getPrefeitura();
+      if (res && res.length > 0) {
+        setPrefeituraSelecionada(res[0]);
+        setPrefeituras(res);
+      }
+    } catch (error) {
+      dispatch(
+        changeNotify({
+          open: true,
+          class: "error",
+          msg:  error.response.data.message
+        })
+      );
+    
     }
   };
   useEffect(() => {
@@ -60,12 +71,13 @@ function CadastroComercio() {
         reset();
       })
       .catch((error) => {
+       
         dispatch(changeloading({ open: false }));
         dispatch(
           changeNotify({
             open: true,
             class: "error",
-            msg: 'Erro ao cadastrar comercio !'
+            msg:  error.response.data.message
           })
         );
       });

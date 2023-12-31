@@ -10,8 +10,11 @@ import CadastroComercio from "./Admin/Comercio/CadastroComercio";
 import TableComercio from "./Admin/Comercio/TableComercio";
 import Vendas from "./Comercio/Vendas/Vendas";
 import RelatorioVendas from "./Comercio/Vendas/RelatorioVendas";
+import DashboardComercio from "./Comercio/DashboardComercio/DashboardComecio";
+import DashboardCliente from "./Clientes/DashboardCliente/DashboardCliente";
 
 import NotFound from "./NotFound/NotFound";
+import AcessoNegado from "./NotFound/AcessoNegado";
 
 
 
@@ -21,5 +24,5 @@ import NotFound from "./NotFound/NotFound";
 export{
     Login, Dashboard, CadastroClientes, TableClientes, CadastroCartoes, TableCartoes,
      NotFound, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas,
-     RelatorioVendas, 
+     RelatorioVendas, DashboardComercio, DashboardCliente, AcessoNegado
 }

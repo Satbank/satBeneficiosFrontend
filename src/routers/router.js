@@ -1,40 +1,39 @@
 import { Routes, Route } from 'react-router-dom';
 
 import PrivateRoute from './privateRoute';
-import { Dashboard, Login,  CadastroClientes, TableClientes, CadastroCartoes, NotFound, TableCartoes, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas, RelatorioVendas,  } from '../pages';
+import { Dashboard, Login,  CadastroClientes, TableClientes, CadastroCartoes, NotFound, TableCartoes, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas, RelatorioVendas, DashboardComercio, DashboardCliente, AcessoNegado,  } from '../pages';
 
 
-function Private(component) {
-  return <PrivateRoute>{component}</PrivateRoute>;
-}
+
 
 export const AppRoutes = () => {
 
   return (
     <Routes>
-         <Route path="/" element={<Login />} />
-         <Route path="/login" element={<Login />} />
-         <Route path="/dashboard/admin" element={Private(<Dashboard />)} />
+    <Route path="/" element={<Login />} />
+    <Route path="/login" element={<Login />} />
 
-         <Route path="/cadastroEmpresas" element={Private(<CadastroComercio />)} />
-         <Route path="/todasEmpresas" element={Private(<TableComercio />)} />
+    {/* Rotas para admin (perfils_id = 1) */}
+    <Route path="/dashboard/admin" element={<PrivateRoute allowedProfiles={[1]}><Dashboard /></PrivateRoute>} />
+    <Route path="/cadastroEmpresas" element={<PrivateRoute allowedProfiles={[1]}><CadastroComercio /></PrivateRoute>} />
+    <Route path="/todasEmpresas" element={<PrivateRoute allowedProfiles={[1]}><TableComercio /></PrivateRoute>} />
+    <Route path="/cadastroClientes" element={<PrivateRoute allowedProfiles={[1]}><CadastroClientes /></PrivateRoute>} />
+    <Route path="/todosClientes" element={<PrivateRoute allowedProfiles={[1]}><TableClientes /></PrivateRoute>} />
+    <Route path="/cadastroCartoes" element={<PrivateRoute allowedProfiles={[1]}><CadastroCartoes /></PrivateRoute>} />
+    <Route path="/todosCartoes" element={<PrivateRoute allowedProfiles={[1]}><TableCartoes /></PrivateRoute>} />
+    <Route path="/alocarPrefeitura" element={<PrivateRoute allowedProfiles={[1]}><AlocarPrefeitura /></PrivateRoute>} />
+    <Route path="/alocarClientes" element={<PrivateRoute allowedProfiles={[1]}><AlocarClientes /></PrivateRoute>} />
 
-         <Route path="/cadastroClientes" element={Private(<CadastroClientes />)} />
-         <Route path="/todosClientes" element={Private(<TableClientes />)} />
+    {/* Rotas para comercio (perfils_id = 3) */}
+    <Route path="/novavenda" element={<PrivateRoute allowedProfiles={[3]}><Vendas /></PrivateRoute>} />
+    <Route path="/relatorio/vendas" element={<PrivateRoute allowedProfiles={[3]}><RelatorioVendas /></PrivateRoute>} />
+    <Route path="/dashboard/comercio" element={<PrivateRoute allowedProfiles={[3]}><DashboardComercio /></PrivateRoute>} />
 
-         <Route path="/cadastroCartoes" element={Private(<CadastroCartoes />)} />
-         <Route path="/todosCartoes" element={Private(<TableCartoes />)} />
+    {/* Rotas para cliente (perfils_id = 2) */}
+    <Route path="/dashboard/cliente" element={<PrivateRoute allowedProfiles={[2]}><DashboardCliente /></PrivateRoute>} />
 
-         <Route path="/alocarPrefeitura" element={Private(<AlocarPrefeitura />)} />
-         <Route path="/alocarClientes" element={Private(<AlocarClientes />)} />
-       
-         <Route path="/novavenda" element={Private(<Vendas />)} />
-         <Route path="/relatorio/vendas" element={Private(<RelatorioVendas />)} />
-  
-
-
-         <Route path="*" element={<NotFound />} /> 
-     
-    </Routes>
-  );
+    <Route path="*" element={<NotFound />} />
+    <Route path="AcessoNegado" element={<AcessoNegado />} />
+  </Routes>
+);
 }

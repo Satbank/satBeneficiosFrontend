@@ -65,7 +65,7 @@ const headers = [
 
 function RelatorioVendas() {
 
-  const [loading, setLoading] = useState(false);
+ 
   const [selectedDays, setSelectedDays] = useState('1');
   const [relatorios, setRelatorios] = useState([]);
   const [mounted, setMounted] = useState(true);
@@ -163,6 +163,7 @@ function RelatorioVendas() {
         </Grid>
 
         <Grid item xs={12} md={12}>
+
           <Box marginTop={2} component={Paper} elevation={5} padding={2}>
             <TableComponet
               headers={headers}

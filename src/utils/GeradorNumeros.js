@@ -12,7 +12,7 @@ const GeradorNumeros = ({ setNumeroCartao }) => {
   };
 
   return (
-    <Button variant='contained' onClick={gerarNumerosAleatorios}>Gerar</Button >
+    <Button variant='contained'  onClick={gerarNumerosAleatorios}>Gerar</Button >
   );
 };
 

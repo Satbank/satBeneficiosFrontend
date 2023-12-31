@@ -9,13 +9,13 @@ import { yupResolver } from "@hookform/resolvers/yup"
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 
-import { MaskCartao, MaskDate, MaskValor } from '../../../utils/mascaras';
+import { MaskCartao, MaskDate } from '../../../utils/mascaras';
 import { changeloading } from '../../../store/actions/loading.action';
 import { changeNotify } from '../../../store/actions/notify.actions';
 import { CartaoService } from '../../../services';
 import ClientesService from '../../../services/clientes/ClientesService';
 import { useDebounce } from '../../../hooks/UseDebounce';
-
+import satbanckCartaoBenefeicio from "../../../image/satbanckCartaoBenefeicio.jpg"
 import GeradorNumeros from '../../../utils/GeradorNumeros'
 
 
@@ -25,8 +25,8 @@ const schema = yup.object({
   numero_cartao: yup.string().required('O campo é obrigatório!').min(16, 'no minimo 16 caracteres'),
   tipo_cartao: yup.string().required('O campo é obrigatório!'),
   status: yup.string(),
-  senha: yup.string().required('O campo é obrigatório!').min(6,'Deve ter no minimo 6 caracteries')
-  
+  senha: yup.string().required('O campo é obrigatório!').min(6, 'Deve ter no minimo 6 caracteries')
+
 });
 
 
@@ -60,9 +60,9 @@ function CadastroCartoes() {
     setIsLoading(true);
     debounce(() => {
       ClientesService.getClientes(busca)
-        .then((res) => {  
+        .then((res) => {
           setIsLoading(false);
-          setOptionsClientes(res.clientes.map(clientes => ({ id: clientes.users_id, label: clientes.nome, cpf:clientes.cpf })))
+          setOptionsClientes(res.clientes.map(clientes => ({ id: clientes.users_id, label: clientes.nome, cpf: clientes.cpf })))
         })
     },);
   }, [busca]);
@@ -70,7 +70,7 @@ function CadastroCartoes() {
   const autoCompleteSelectedOption = useMemo(() => {
     if (!selectedId) return null;
     const selectedOption = optionsCliente.find(optionsCliente => optionsCliente.id === selectedId);
-    if (!selectedOption) return null;    
+    if (!selectedOption) return null;
     return selectedOption;
   }, [selectedId, optionsCliente]);
 
@@ -78,7 +78,7 @@ function CadastroCartoes() {
 
 
   function handleSubmit(data) {
-    let newData = { ...data, users_id: selectedId }  
+    let newData = { ...data, users_id: selectedId }
     dispatch(
       changeloading({
         open: true,
@@ -111,27 +111,27 @@ function CadastroCartoes() {
   };
 
   const handleGenerateCard = () => {
-    const nomeCliente = autoCompleteSelectedOption ? autoCompleteSelectedOption.label : 'Cliente';  
+    const nomeCliente = autoCompleteSelectedOption ? autoCompleteSelectedOption.label : 'Cliente';
     // Usa o html2canvas para capturar a parte específica do componente como uma imagem
     html2canvas(document.getElementById('card-container')).then((canvas) => {
       // Converte o canvas em um blob
       canvas.toBlob((blob) => {
         // Define o nome do arquivo com o nome do cliente
-        const nomeArquivo = `cartao_${nomeCliente}.png`;  
+        const nomeArquivo = `cartao_${nomeCliente}.png`;
         // Usa o FileSaver para fazer o download do blob como um arquivo PNG
         saveAs(blob, nomeArquivo);
       });
     });
   };
 
-  const handleClientSelection = (_, newValue) => {  
+  const handleClientSelection = (_, newValue) => {
     setSelectedId(newValue?.id);
     setBusca('');
     // Pega os 6 primeiros dígitos do CPF do cliente selecionado
     const cpf = newValue?.cpf || '';
     const sixDigitsCpf = cpf.substring(0, 6);
-        // Armazena a senha temporariamente no estado
-        setSenhaPega(sixDigitsCpf);
+    // Armazena a senha temporariamente no estado
+    setSenhaPega(sixDigitsCpf);
 
     // Preenche o campo de senha com os 6 primeiros dígitos do CPF
     setValue('senha', sixDigitsCpf, { shouldValidate: true });
@@ -142,12 +142,10 @@ function CadastroCartoes() {
         <Typography variant='h1' sx={{ fontSize: '30px!important' }}>Cadastrar Novo Cartão </Typography>
       </Box>
       <Grid container spacing={2} alignItems="center" justify="center">
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <Box component={Paper} padding={2} sx={{ backgroundColor: '#1C2335' }}>
-            <Typography marginBottom={2} variant='h2'>Cartão</Typography>
             <form onSubmit={onSubmit(handleSubmit)}>
               <Grid container spacing={2} alignItems="center" justify="center">
-
                 <Grid item xs={12} md={5}>
                   <Autocomplete
                     openText='Abrir'
@@ -202,15 +200,15 @@ function CadastroCartoes() {
                 </Grid>
 
                 <Grid item xs={12} md={3}>
-                <InputLabel sx={{ color: 'white' }} htmlFor='tipo'>Senha</InputLabel>
+                  <InputLabel sx={{ color: 'white' }} htmlFor='tipo'>Senha</InputLabel>
                   <TextField
                     label='Senha do cartão'
                     id='senha'
                     variant='outlined'
                     fullWidth
                     {...register("senha")}
-                    size="small"   
-                    value={senhaPega} 
+                    size="small"
+                    value={senhaPega}
                   />
                   <Typography variant='subtitle2'>{errors?.senha?.message}</Typography>
                 </Grid>
@@ -259,7 +257,7 @@ function CadastroCartoes() {
                   <Typography variant='subtitle2'>{errors?.status?.message}</Typography>
                 </Grid>
 
-               
+
 
                 <Grid item xs={12} md={3} marginTop='27px'>
                   <TextField
@@ -291,46 +289,86 @@ function CadastroCartoes() {
         </Grid>
 
         {/* Segundo contêiner Grid com o Typography */}
-        <Grid item xs={12} md={5} marginTop='29px'>
-          <Box id="card-container" component={Paper} sx={{ flexGrow: 1, backgroundColor: '#1C2335' }} paddingBottom={2}>
-            <Grid container spacing={2} alignItems="center" justify="center" paddingLeft={5} paddingTop={5}>
 
-              <Grid item xs={12} md={12}>
-                <Box marginBottom={2} >
-                  <Typography variant='subtitle1'>Logo Tipo</Typography>
-                </Box>
-              </Grid>
+        <Grid item xs={12} md={5} >
+          <Box
+            id="card-container"
+            component={Paper}
+            sx={{
+              width: '115.60mm',
+              height: '69.98mm',
+              backgroundImage: `url(${satbanckCartaoBenefeicio})`,
+              backgroundSize: 'cover',
+              position: 'relative',  // Habilita o posicionamento absoluto
+            }}
+          >
+            {/* Conteúdo do componente */}
+            <Typography
+              variant='subtitle1'
+              color='#150A59!important'
+              fontSize='17px!important'
+              sx={{
+                position: 'absolute',
+                top: '100px',
+                left: '15px',
+                fontWeight: 'bold',
+              }}
+            >
+              {numeroCartao || numeroCartaoGerado || 'Numero do cartão'}
+            </Typography>
 
-              <Grid item xs={5} md={6}>
-                <Box marginBottom={2} >
-                  <Typography variant='subtitle1'>{numeroCartao || numeroCartaoGerado || 'Numero do cartão'}</Typography>
-                </Box>
-              </Grid>
+            <Typography
+              variant='subtitle1'
+              color='black'
+              fontSize='14px!important'
+              sx={{
+                position: 'absolute',
+                top: '135px',
+                right: '300px',
+              }}
+            >
+              {dataValidade || 'Data de Validade'}
+            </Typography>
 
-              <Grid item xs={1} md={2}>
-                <Box >
-                
-                </Box>
-              </Grid>
+            <Typography
+              variant='subtitle1'
+              color='black'
+              fontSize='14px!important'
+              sx={{
+                position: 'absolute',
+                top: '135px',
+                right: '215px',
+              }}
+            >
+              999
+            </Typography>
 
-              <Grid item xs={6} md={4}>
-                <Box marginLeft={3} backgroundColor='#fff' width={85}>
-                  <Box paddingLeft='5px' paddingTop='3px'>
-                    <QRCode value={numeroCartao || numeroCartaoGerado} size={75} />
-                  </Box>
-                </Box>
-              </Grid>
+            <Typography
+              variant='subtitle1'
+              color='#150A59!important'
+              sx={{
+                position: 'absolute',
+                bottom: '58px',              
+                left: '18px',
+                fontWeight: 'bold',
 
-              <Grid item xs={6} md={6}>
-                <Typography variant='subtitle1'>{autoCompleteSelectedOption ? autoCompleteSelectedOption.label : 'Nome do Cliente'}</Typography>
-              </Grid>
+              }}
+            >
+              {autoCompleteSelectedOption ? autoCompleteSelectedOption.label : 'Nome do Cliente'}
+            </Typography>
 
-              <Grid item xs={6} md={6}>
-                <Typography variant='subtitle1'>{dataValidade || 'Data de Validade'}</Typography>
-              </Grid>
-
-
-            </Grid>
+            <Box
+              sx={{
+                position: 'absolute',
+                bottom: '23px',
+                right: '165px',
+                backgroundColor: '#fff',
+                paddingLeft: '5px',
+                paddingTop: '3px',
+              }}
+            >
+              <QRCode value={numeroCartao || numeroCartaoGerado} size={65} />
+            </Box>
           </Box>
           <Grid item xs={12} md={12} marginTop={2}>
             <Box textAlign="center">
@@ -338,6 +376,10 @@ function CadastroCartoes() {
             </Box>
           </Grid>
         </Grid>
+
+
+
+
       </Grid>
 
     </Box>

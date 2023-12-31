@@ -13,8 +13,7 @@ import { login } from '../../store/actions/auth.actions';
 import { changeNotify } from "../../store/actions/notify.actions";
 import { isAuthenticated } from '../../utils/AuthHelp';
 import { UserDataService } from "../../services";
-import { saveUser } from "../../store/actions/LoginAction";
-import { bindActionCreators } from "redux";
+
 
 const schema = yup
   .object({
@@ -22,8 +21,8 @@ const schema = yup
     password: yup.string().required('campo obrigatorio').min(5, 'a senha tem que ter pelo menos 5 caracteries'),
   })
 
-function Login(props) {
-  const { user } = props;
+function Login() {
+
   const { register, handleSubmit: onSubmit, formState: { errors }, } = useForm({ resolver: yupResolver(schema) });
   const navigate = useNavigate();
 
@@ -36,26 +35,23 @@ function Login(props) {
         if (isAuthenticated()) {
           UserDataService.getUser()
             .then((data) => {
-              props.saveUser(data)
-              navigate("/dashboard/admin");
-              // const { perfils_id } = user
-              // console.log(user)
-              // switch (perfils_id) {
-              //   case 1:
-              //     navigate("/dashboard/admin");
-              //     break;
-              //   case 2:
-              //     navigate("/dashboard/prefeitura");
-              //     break;
-              //   case 3:
-              //     navigate("/dashboard/comercio");
-              //     break;
-              //   case 4:
-              //     navigate("/dashboard/cliente");
-              //     break;
-              //   default:
-              //     break;
-              // }
+              const { perfils_id } = data
+              switch (perfils_id) {
+                case 1:
+                  navigate("/dashboard/admin");
+                  break;
+                case 2:
+                  navigate("/dashboard/prefeitura");
+                  break;
+                case 3:
+                  navigate("/dashboard/comercio");
+                  break;
+                case 4:
+                  navigate("/dashboard/cliente");
+                  break;
+                default:
+                  break;
+              }
               dispatch(changeNotify({
                 open: true,
                 class: "success",
@@ -136,10 +132,5 @@ function Login(props) {
   )
 
 }
-const mapStateToProps = (store) => ({
-  user: store.loginReducer.user,
-});
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ saveUser }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default (Login);
