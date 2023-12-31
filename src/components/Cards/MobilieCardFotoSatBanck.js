@@ -9,7 +9,7 @@ import SatBankFoto3 from '../../image/satbankfoto3.jpg';
 import Maquininha from '../../image/maquininha.jpg'
 import { CardContent, CardMedia } from '@mui/material';
 
-function CardFotoSatBank() {
+function MobilieCardFotoSatBanck() {
   const settings = {
     dots: true,
     infinite: true,
@@ -93,4 +93,4 @@ function CardFotoSatBank() {
   );
 }
 
-export default CardFotoSatBank;
+export default MobilieCardFotoSatBanck;

@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from "react-redux";
 import {  CardContent, CardMedia, Typography } from "@mui/material";
-import Mao from '../../image/mao-3d.png';
 import SatBank from '../../image/SatBank.png'
 
-const CardBemVindo = ({ user }) => (
+const MobilieCardBemVindo = ({ user }) => (
   <>
-    <CardContent sx={{ height: '220px', width:'640px' , position: 'relative', background: 'radial-gradient(circle, #003366, #66ccff,#fff)', }}>
+    <CardContent sx={{ height: '420px', width:'320px' , position: 'relative', background: 'radial-gradient(circle, #003366, #66ccff,#fff)', }}>
       <Typography
         color=""
         sx={{
@@ -30,24 +29,13 @@ const CardBemVindo = ({ user }) => (
       >
         {user?.nome || user?.nome_fantasia || 'Usuário'}
       </Typography>
-      <CardMedia
-        component="img"
-        height="290"
-        image={Mao}
-        alt="foto"
-        sx={{
-          position: 'absolute',
-          top: '1px',
-          left: '465px',
-          width: '290px',
-        }}
-      />
+ 
 
       <Typography
         color=""
         sx={{
           position: 'absolute',
-          top: '100px',
+          top: '250px',
           left: '25px',
           fontSize: '30px!important'
         }}
@@ -61,7 +49,7 @@ const CardBemVindo = ({ user }) => (
         alt="SatBank"
         sx={{
           position: 'absolute',
-          top: '175px',
+          top: '345px',
           left: '25px', 
           width: '150px', 
         }}
@@ -70,7 +58,7 @@ const CardBemVindo = ({ user }) => (
         color=""
         sx={{
           position: 'absolute',
-          top: '173px',
+          top: '340px',
           left: '190px',
           fontSize: '30px!important'
         }}
@@ -85,4 +73,4 @@ const mapStateToProps = (store) => ({
   user: store.loginReducer.user,
 });
 
-export default connect(mapStateToProps)(CardBemVindo);
+export default connect(mapStateToProps)(MobilieCardBemVindo);
