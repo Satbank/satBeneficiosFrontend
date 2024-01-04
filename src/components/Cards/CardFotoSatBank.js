@@ -16,14 +16,14 @@ function CardFotoSatBank() {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true, 
-    autoplaySpeed: 5000, 
+    autoplay: true,
+    autoplaySpeed: 5000,
   };
 
   return (
-    <div style={{ maxWidth: '450px', margin: 'auto' }}>
+    <div style={{ width: '650px', margin: 'auto' }}>
       <Slider {...settings}>
-        <div>
+        <div style={{ width: '100%' }}>
           <CardContent>
             <CardMedia
               component="img"
@@ -31,7 +31,7 @@ function CardFotoSatBank() {
               image={SatBankFoto}
               alt="foto"
               sx={{
-                width: '320px',
+                width: '100%', 
               }}
             />
           </CardContent>
@@ -44,7 +44,7 @@ function CardFotoSatBank() {
               image={SatBankFoto1}
               alt="foto"
               sx={{
-                width: '320px',
+                width: '100%',
               }}
             />
           </CardContent>
@@ -57,7 +57,7 @@ function CardFotoSatBank() {
               image={SatBankFoto2}
               alt="foto"
               sx={{
-                width: '320px',
+                width: '100%',
               }}
             />
           </CardContent>
@@ -70,7 +70,7 @@ function CardFotoSatBank() {
               image={SatBankFoto3}
               alt="foto"
               sx={{
-                width: '320px',
+                width: '100%',
               }}
             />
           </CardContent>
@@ -83,7 +83,7 @@ function CardFotoSatBank() {
               image={Maquininha}
               alt="foto"
               sx={{
-                width: '320px',
+                width: '100%',
               }}
             />
           </CardContent>

@@ -1,52 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { Box, CardContent, Icon, Paper, Typography, useMediaQuery } from '@mui/material';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import CountUp from 'react-countup';
+import CreditCard from '@mui/icons-material/CreditCard';
 import { Link as RouterLink } from 'react-router-dom';
 import { TotalMes } from '../../services';
+import CountUp from 'react-countup';
 
-// import { Container } from './styles';
 
-function CardAdminTotalMes() {
-  const [totalmes, setTotalMes] = useState([])
+
+
+function CardTotalCartoes() {
+  const [totalcartoes, setTotalCartoes] = useState([])
   const [isMouseOver, setIsMouseOver] = useState(false);
 
-  async function getTotalMes() {
-    const res = await TotalMes.getTotalMes();
-    if (res)
-      setTotalMes(res.total_taxas)
+  async function getTotalCartoes() {
+    const res = await TotalMes.getTotalCartoes();
+    if (res)   
+    setTotalCartoes(res)
   }
   useEffect(() => {
-    getTotalMes();
+    getTotalCartoes();
   }, [])
 
   return (
     <CardContent >
-      <RouterLink to="#" style={{ textDecoration: 'none' }}>
+      <RouterLink to="/todosCartoes" style={{ textDecoration: 'none' }}>
         <Box
           component={Paper}
-  elevation={5} 
-  sx={{
-    width: '100%', // ou ajuste conforme necessário
-    maxWidth: '100%', // adiciona uma largura máxima
-    height: '130px',
-    background: '#003366',
-    overflow:'hidden',
-    transition: 'transform 0.3s ease',
-    transform: isMouseOver ? 'translateX(10px)' : 'translateX(0)',
-  }}
+          elevation={5}
+          sx={{
+            width: '100%', // ou ajuste conforme necessário
+            maxWidth: '100%', // adiciona uma largura máxima
+            height: '130px',
+            background: '#003366',
+            overflow: 'hidden',
+            transition: 'transform 0.3s ease',
+            transform: isMouseOver ? 'translateX(10px)' : 'translateX(0)',
+          }}
           onMouseEnter={() => setIsMouseOver(true)}
           onMouseLeave={() => setIsMouseOver(false)}>
           <Icon
-            component={AttachMoneyIcon}
+            component={CreditCard}
             sx={{
-              height:'110%',
-              opacity:'0,3',
-              fontSize: '150px',
+              height: '90%',
+              opacity: '0,3',
+              fontSize: '100px',
               color: 'rgba(255, 255, 255, 0.5)',
               position: 'absolute',
-              right: '-50px',
-              top:'-10px'
+              right: '-5px',
+              top: '25px'
             }}
           />
           <Typography variant='h3'
@@ -58,22 +59,22 @@ function CardAdminTotalMes() {
               fontSize: '20px!important',
 
             }}
-          >Total Arrecadado Mês </Typography>
- 
+          >Total cartões ativos </Typography>
+
           <Typography variant='h3'
             sx={{
-              color: '#2CFF5A',
+              color: '#D26806',
               position: 'absolute',
               top: '60px',
               left: '72px',
               fontSize: '35px!important',
 
             }}
-          ><CountUp end={totalmes} prefix='R$ ' separator='.' decimal=',' decimals={2}/> </Typography>
+          ><CountUp end={totalcartoes} /></Typography>
         </Box>
       </RouterLink>
     </CardContent>
   )
 }
 
-export default CardAdminTotalMes;
+export default CardTotalCartoes;

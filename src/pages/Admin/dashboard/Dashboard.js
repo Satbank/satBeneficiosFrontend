@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, Grid, useMediaQuery, useTheme } from '@mui/material'
-import { CardAdminTotalMes, CardBemVindo, MobilieCardBemVindo, MobilieCardFotoSatBanck } from '../../../components'
+import { CardAdminTotalMes, CardBemVindo, CardTotalCartoes, CardTotalClientesbase, CardTotalComercios, SimpleLineChart, } from '../../../components'
 import CardFotoSatBank from '../../../components/Cards/CardFotoSatBank'
 
 function Dashboard() {
@@ -9,38 +9,34 @@ function Dashboard() {
 
   return (
     <Box>
-      {isLgScreen ? (
-        // Se for uma tela grande, renderize este layout
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={12} lg={7}>
-            <CardBemVindo />
-          </Grid>
-          <Grid item xs={12} md={6} lg={5}>
-            <CardFotoSatBank />
-          </Grid>
-          <Grid item xs={12} md={2} marginTop={32} sx={{ position: 'absolute' }}>
-            <CardAdminTotalMes />
-          </Grid>
-          <Grid item xs={12} md={8}></Grid>
-        </Grid>
-      ) : (
-        // Se for uma tela pequena, renderize este layout
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
-            <MobilieCardBemVindo />
-          </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={12} md={12} lg={12}>
+        <CardBemVindo />
+      </Grid>  
 
-          <Grid item xs={12} md={6}>
-            <MobilieCardFotoSatBanck/>
-          </Grid>
+      <Grid item xs={12} md={5} lg={3}>
+        <CardAdminTotalMes />
+      </Grid>
 
-          <Grid item xs={12} md={6}>
-            <CardAdminTotalMes/>
-          </Grid>
-        
-        </Grid>
-      )}
-    </Box>
+      <Grid item xs={12} md={5} lg={3}>
+        <CardTotalCartoes />
+      </Grid>
+
+      <Grid item xs={12} md={5} lg={3} >
+        <CardTotalClientesbase />
+      </Grid>
+
+      <Grid item xs={12} md={5} lg={3} >
+        <CardTotalComercios />
+      </Grid>
+
+      <Grid item xs={12} md={10} lg={7}>
+         <SimpleLineChart/>
+      </Grid>
+
+      <Grid item xs={12} md={12}></Grid>
+    </Grid>
+  </Box>
   );
 }
 export default Dashboard

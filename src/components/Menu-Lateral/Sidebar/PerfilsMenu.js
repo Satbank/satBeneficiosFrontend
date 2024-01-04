@@ -23,6 +23,10 @@ const PerfilsMenu = [
           name: "Todas comercios",
           submenuRoute: "/todasEmpresas", // Rota do submenu
         },
+        {
+          name: "Pagar Comercios",
+          submenuRoute: "", // Rota do submenu
+        },
       ],
     },
     {

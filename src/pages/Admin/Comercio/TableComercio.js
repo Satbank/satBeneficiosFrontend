@@ -1,10 +1,9 @@
-import { Box, Paper} from '@mui/material';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Box, Button, Paper } from '@mui/material';
 import { TableComponet } from '../../../components';
 import { EmpresaService } from '../../../services';
 import { changeloading } from '../../../store/actions/loading.action';
-import { useDispatch } from 'react-redux';
-
 
 //linhas da tabela
 const headers = [
@@ -97,12 +96,12 @@ function TableComercio() {
   //função que faz as buscar no backend para tabela de comercios 
   async function getComercios() {
     const res = await EmpresaService.getEmpresas();
-  
-    if (res) {   
+
+    if (res) {
       setEmpresas(res.comercios);
     }
   }
-  
+
   React.useEffect(() => {
     const fetchData = async () => {
       dispatch(
@@ -111,10 +110,10 @@ function TableComercio() {
           msg: "Carregando",
         })
       );
-  
+
       if (mounted) {
         await getComercios();
-  
+
         dispatch(
           changeloading({
             open: false,
@@ -122,30 +121,30 @@ function TableComercio() {
         );
       }
     };
-  
+
     fetchData();
     return () => {
       setMounted(false);
     };
   }, [dispatch, mounted]);
-  
 
- 
+
+
   return (
-   <Box component={Paper}>
-     <TableComponet
+    <Box component={Paper}>
+      <TableComponet
         headers={headers}
         data={empresas}
         labelCaption={'Nenhum produto encontrado!!'}
         labelTable={'Empresas'}
         handlerEditarAction={''}
-        handlerDeletarAction={''}      
-     />
-   </Box>
+        handlerDeletarAction={''}
+      />
+    </Box>
 
   );
- 
-  
+
+
 
 }
 
