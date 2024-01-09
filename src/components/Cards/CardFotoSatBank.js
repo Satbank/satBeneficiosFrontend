@@ -21,13 +21,13 @@ function CardFotoSatBank() {
   };
 
   return (
-    <div style={{ width: '650px', margin: 'auto' }}>
+    <div style={{ width: '530px', margin: 'auto' }}>
       <Slider {...settings}>
         <div style={{ width: '100%' }}>
           <CardContent>
             <CardMedia
               component="img"
-              height="300"
+              height="280"
               image={SatBankFoto}
               alt="foto"
               sx={{
@@ -40,7 +40,7 @@ function CardFotoSatBank() {
           <CardContent>
             <CardMedia
               component="img"
-              height="300"
+              height="280"
               image={SatBankFoto1}
               alt="foto"
               sx={{
@@ -53,7 +53,7 @@ function CardFotoSatBank() {
           <CardContent>
             <CardMedia
               component="img"
-              height="300"
+              height="280"
               image={SatBankFoto2}
               alt="foto"
               sx={{
@@ -66,7 +66,7 @@ function CardFotoSatBank() {
           <CardContent>
             <CardMedia
               component="img"
-              height="300"
+              height="280"
               image={SatBankFoto3}
               alt="foto"
               sx={{
@@ -79,7 +79,7 @@ function CardFotoSatBank() {
           <CardContent>
             <CardMedia
               component="img"
-              height="300"
+              height="280"
               image={Maquininha}
               alt="foto"
               sx={{

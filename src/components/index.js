@@ -11,7 +11,10 @@ import CardAdminTotalMes from "./Cards/CardAdminTotalMes";
 import CardTotalCartoes from "./Cards/CardTotalCartoes";
 import CardTotalClientesbase from "./Cards/CardTotalClientesbase";
 import CardTotalComercios from "./Cards/CardTotalComercios";
+import CardTotalVendasComercios from "./Cards/CardTotalVendasComercios";
+import CardSaldoCartao from "./Cards/CardSaldoCartao";
 import SimpleLineChart from "./Graficos/SimpleLineChart";
+import CardFotoSatBank from "./Cards/CardFotoSatBank";
 
 
 
@@ -20,5 +23,5 @@ import SimpleLineChart from "./Graficos/SimpleLineChart";
 export {
     Loading, Notify, Alert, Confirm, AvatarAppBar, ProgressBar, CircularIndeterminate,
     TableComponet, CardBemVindo, CardAdminTotalMes, CardTotalCartoes, CardTotalClientesbase,
-    CardTotalComercios, SimpleLineChart
+    CardTotalComercios, SimpleLineChart, CardTotalVendasComercios, CardSaldoCartao, CardFotoSatBank
 }

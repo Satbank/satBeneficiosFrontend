@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import React from 'react';
 import CardBemVindo from '../../../components/Cards/CardBemVindo';
+import { CardFotoSatBank, CardSaldoCartao } from '../../../components';
 
 // import { Container } from './styles';
 
@@ -12,18 +13,14 @@ function DashboardCliente() {
         <Grid item xs={12} md={12} lg={8}>
           <CardBemVindo />
         </Grid>
+     
 
+        <Grid item xs={12} md={6} lg={5}>
+          <CardSaldoCartao/>
+        </Grid>
 
         <Grid item xs={12} md={6} lg={4}>
-          <Typography>aqui</Typography>
-        </Grid>
-
-        <Grid item xs={12} md={4}>
-
-        </Grid>
-
-        <Grid item xs={12} md={8}>
-
+          <CardFotoSatBank/>
         </Grid>
 
       </Grid>

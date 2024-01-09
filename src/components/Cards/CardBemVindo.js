@@ -43,7 +43,7 @@ const CardBemVindo = ({ user }) => {
             sx={{
               position: 'absolute',
               top: '1px',
-              left: '565px',
+              left: '500px',
               width: '290px',
             }}
           />

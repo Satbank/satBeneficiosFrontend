@@ -30,7 +30,7 @@ export const AppRoutes = () => {
     <Route path="/dashboard/comercio" element={<PrivateRoute allowedProfiles={[3]}><DashboardComercio /></PrivateRoute>} />
 
     {/* Rotas para cliente (perfils_id = 2) */}
-    <Route path="/dashboard/cliente" element={<PrivateRoute allowedProfiles={[2]}><DashboardCliente /></PrivateRoute>} />
+    <Route path="/dashboard/cliente" element={<PrivateRoute allowedProfiles={[4]}><DashboardCliente /></PrivateRoute>} />
 
     <Route path="*" element={<NotFound />} />
     <Route path="AcessoNegado" element={<AcessoNegado />} />

@@ -43,6 +43,16 @@ class TotalMes {
     return res;
   }
 
+  static async getTotalVendasComercio(obj) {
+    let res = null;
+
+    await Http.get("/api/totalvendacomercio").then((response) => {
+      res = response.data;     
+    });
+
+    return res;
+  }
+
   static async getTotalComerciosBase(obj) {
     let res = null;
 

@@ -1,7 +1,7 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import React from 'react';
-import {  CardBemVindo } from '../../../components';
-import CardFotoSatBank from '../../../components/Cards/CardFotoSatBank';
+import {  CardBemVindo, CardFotoSatBank, CardTotalVendasComercios } from '../../../components';
+
 
 
 // import { Container } from './styles';
@@ -16,12 +16,12 @@ function DashboardComercio() {
         </Grid>
 
 
-        <Grid item xs={12} md={5}>
+        <Grid item xs={12} md={5} lg={3}>
           <CardFotoSatBank />
         </Grid>
 
-        <Grid item xs={12} md={2} >
-          
+        <Grid item xs={12} md={8}  lg={3} >
+          <CardTotalVendasComercios/>
         </Grid>
 
         <Grid item xs={12} md={8}>

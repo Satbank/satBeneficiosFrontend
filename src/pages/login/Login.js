@@ -1,5 +1,5 @@
 
-import { useDispatch, connect } from "react-redux";
+import { useDispatch, } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Card, CardContent, CardMedia, TextField, Typography } from '@mui/material'
 // react hook form
@@ -52,11 +52,7 @@ function Login() {
                 default:
                   break;
               }
-              dispatch(changeNotify({
-                open: true,
-                class: "success",
-                msg: "Seja Bem Vindo!"
-              }));
+           
             })
         } else {
           // Trata o caso em que o usuário não está autenticado

@@ -129,38 +129,16 @@ const PerfilsMenu = [
       isSubmenu: false,
     },
   ],
-  // beneficiario
+  // cliente
   [
     {
-      name: "Transmissão Online",
+      name: "Dashboard",
       icon: Home,
-      route: "#",
-      isSubmenu: true,
-      submenu: [
-        {
-          name: "Evento",
-          submenuRoute: "/streaming/evento",
-        },
-        {
-          name: "Atividades",
-          submenuRoute: "/streaming/atividades",
-        },
-        {
-          name: "Área de transmissão",
-          submenuRoute: "/streaming/trasmissao",
-        },
-      ],
-    },
-  ],
-  // comercio
-  [
-    {
-      name: "Perfil",
-      icon: Home,
-      route: "/perfil",
+      route: "/dashboard/cliente",
       isSubmenu: false,
     },
   ],
+
 ];
 
 export default PerfilsMenu;
