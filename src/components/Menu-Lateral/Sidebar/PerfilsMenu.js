@@ -1,4 +1,4 @@
-import { Home, Business, GroupAdd, AddCard, Paid,  SupportAgent } from "@mui/icons-material";
+import { Home, Business, GroupAdd, AddCard, Paid,  SupportAgent, LocationCity } from "@mui/icons-material";
 
 const PerfilsMenu = [
   // admin
@@ -8,6 +8,23 @@ const PerfilsMenu = [
       icon: Home,
       route: "/dashboard/admin",
       isSubmenu: false,
+    },
+    {
+      name: "Prefeitura",
+      icon: LocationCity,
+      route: "#", // Rota principal
+      isSubmenu: true,
+      submenu: [
+        {
+          name: "Cadastrar Nova",
+          submenuRoute: "/cadastrarPrefeitura", // Rota do submenu
+        },
+        {
+          name: "Todas Prefeituras",
+          submenuRoute: "#", // Rota do submenu
+        },
+        
+      ],
     },
     {
       name: "Comercio",

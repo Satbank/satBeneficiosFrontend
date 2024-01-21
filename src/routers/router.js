@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 
 import PrivateRoute from './privateRoute';
-import { Dashboard, Login,  CadastroClientes, TableClientes, CadastroCartoes, NotFound, TableCartoes, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas, RelatorioVendas, DashboardComercio, DashboardCliente, AcessoNegado,  } from '../pages';
+import { Dashboard, Login,  CadastroClientes, TableClientes, CadastroCartoes, NotFound, TableCartoes, AlocarPrefeitura, AlocarClientes, CadastroComercio, TableComercio, Vendas, RelatorioVendas, DashboardComercio, DashboardCliente, AcessoNegado, CadastrarPrefeitura,  } from '../pages';
 
 
 
@@ -23,6 +23,7 @@ export const AppRoutes = () => {
     <Route path="/todosCartoes" element={<PrivateRoute allowedProfiles={[1]}><TableCartoes /></PrivateRoute>} />
     <Route path="/alocarPrefeitura" element={<PrivateRoute allowedProfiles={[1]}><AlocarPrefeitura /></PrivateRoute>} />
     <Route path="/alocarClientes" element={<PrivateRoute allowedProfiles={[1]}><AlocarClientes /></PrivateRoute>} />
+    <Route path="/cadastrarPrefeitura" element={<PrivateRoute allowedProfiles={[1]}><CadastrarPrefeitura /></PrivateRoute>} />
 
     {/* Rotas para comercio (perfils_id = 3) */}
     <Route path="/novavenda" element={<PrivateRoute allowedProfiles={[3]}><Vendas /></PrivateRoute>} />

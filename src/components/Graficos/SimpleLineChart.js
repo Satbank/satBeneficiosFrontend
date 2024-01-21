@@ -39,9 +39,9 @@ const SimpleLineChart = () => {
   }, []);
 
   return (
-    <Box component={Paper} padding={2} elevation={5} bgcolor='#003366'>
+    <Box component={Paper} padding={2} elevation={5} bgcolor='#003366' width='100%'>
       <Typography variant='h4' color="#cecece" marginLeft={25}>Grafico movimentação anual</Typography>
-      <LineChart width={700} height={300} data={totalmes} margin={{ top: 20, right: 30, left: 20, bottom: 10 }}  >
+      <LineChart width={550} height={300} data={totalmes} margin={{ top: 20, right: 30, left: 5, bottom: 10 }}  >
         <CartesianGrid vertical={false} strokeDasharray="3 3" stroke="#cecece" />
         <XAxis dataKey="mes" stroke="#cecece" />
         <YAxis />

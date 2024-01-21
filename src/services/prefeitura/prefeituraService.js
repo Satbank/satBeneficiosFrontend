@@ -3,7 +3,6 @@ import { Http } from "../../conf/GlobalConf";
 class PrefeituraService {
   static async create(obj) {
     let res = null;
-
     await Http.post("/api/prefeitura", obj).then((response) => {
       res = response.data;
     });

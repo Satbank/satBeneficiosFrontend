@@ -38,11 +38,7 @@ const PrivateRoute = ({ children, allowedProfiles }) => {
   if (allowedProfiles && !allowedProfiles.includes(user.perfils_id)) {
     return <Navigate to="/AcessoNegado" />;
   }
-  dispatch(changeNotify({
-    open: true,
-    class: "success",
-    msg: "Seja Bem Vindo!"
-  }));
+  
   return <Menu>{children}</Menu>;
 };
 

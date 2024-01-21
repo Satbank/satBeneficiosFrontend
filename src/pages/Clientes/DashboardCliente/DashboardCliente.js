@@ -19,7 +19,7 @@ function DashboardCliente() {
           <CardSaldoCartao/>
         </Grid>
 
-        <Grid item xs={12} md={6} lg={4}>
+        <Grid item xs={12} md={6} lg={4} xl={2}>
           <CardFotoSatBank/>
         </Grid>
 

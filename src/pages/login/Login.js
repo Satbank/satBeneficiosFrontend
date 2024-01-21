@@ -36,6 +36,11 @@ function Login() {
           UserDataService.getUser()
             .then((data) => {
               const { perfils_id } = data
+              dispatch(changeNotify({
+                open: true,
+                class: "success",
+                msg: "Seja Bem Vindo!"
+              }));
               switch (perfils_id) {
                 case 1:
                   navigate("/dashboard/admin");
