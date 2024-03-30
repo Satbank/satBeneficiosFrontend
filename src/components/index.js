@@ -15,13 +15,14 @@ import CardTotalVendasComercios from "./Cards/CardTotalVendasComercios";
 import CardSaldoCartao from "./Cards/CardSaldoCartao";
 import SimpleLineChart from "./Graficos/SimpleLineChart";
 import CardFotoSatBank from "./Cards/CardFotoSatBank";
-
-
+import CardTrocarSenha from "./Cards/CardTrocarSenhaCartao";
+import CardExtrato from "./Cards/CardExtrato";
 
 
 
 export {
     Loading, Notify, Alert, Confirm, AvatarAppBar, ProgressBar, CircularIndeterminate,
     TableComponet, CardBemVindo, CardAdminTotalMes, CardTotalCartoes, CardTotalClientesbase,
-    CardTotalComercios, SimpleLineChart, CardTotalVendasComercios, CardSaldoCartao, CardFotoSatBank
+    CardTotalComercios, SimpleLineChart, CardTotalVendasComercios, CardSaldoCartao, CardFotoSatBank,
+    CardTrocarSenha, CardExtrato
 }

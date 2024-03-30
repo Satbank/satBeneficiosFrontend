@@ -6,10 +6,11 @@ import {MaskCartao} from "./MaskCartao"
 import { MaskValor } from "./MaskValor";
 import { MaskDate } from "./MaskDate";
 import { MaskNome } from "./MaskNome";
+import { MaskDateBackend } from "./MaskDateBackend";
 import  Mask  from "./Mask"
 
 
 
 export {
-  MaskCnpj,MaskCpf,MaskPhone, MaskInscricaoEstadual, Mask, MaskCartao, MaskValor,MaskDate, MaskNome
+  MaskCnpj,MaskCpf,MaskPhone, MaskInscricaoEstadual, Mask, MaskCartao, MaskValor,MaskDate, MaskNome, MaskDateBackend
 }

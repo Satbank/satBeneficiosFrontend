@@ -3,11 +3,16 @@ import { Http } from "../../conf/GlobalConf";
 class ClientesService {
   static async create(obj) {
     let res = null;
-
     await Http.post("/api/cliente", obj).then((response) => {
       res = response.data;
     });
-
+    return res;
+  }
+  static async trazerSaldoCartao(obj) {
+    let res = null;
+    await Http.post("/api/trazersaldocartao", obj).then((response) => {
+      res = response.data;
+    });
     return res;
   }
 
@@ -16,16 +21,12 @@ class ClientesService {
     const params = searchString
       ? { params: { search: searchString, page, pageSize } }
       : { params: { page, pageSize } };
-
     try {
       const response = await Http.get("/api/cliente", params);
-      res = response.data;
-     
+      res = response.data;     
     } catch (error) {
-      // Lida com erros, se necessário
-     
+      // Lida com erros, se necessário     
     }
-
     return res;
   }
 

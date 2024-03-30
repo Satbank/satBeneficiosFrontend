@@ -22,33 +22,8 @@ function CardFotoSatBank() {
 
   return (
     <div style={{ width: '530px', margin: 'auto' }}>
-      <Slider {...settings}>
-        <div style={{ width: '100%' }}>
-          <CardContent>
-            <CardMedia
-              component="img"
-              height="280"
-              image={SatBankFoto}
-              alt="foto"
-              sx={{
-                width: '100%', 
-              }}
-            />
-          </CardContent>
-        </div>
-        <div>
-          <CardContent>
-            <CardMedia
-              component="img"
-              height="280"
-              image={SatBankFoto1}
-              alt="foto"
-              sx={{
-                width: '100%',
-              }}
-            />
-          </CardContent>
-        </div>
+      <Slider {...settings}>       
+      
         <div>
           <CardContent>
             <CardMedia

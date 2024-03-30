@@ -3,10 +3,16 @@ import { Http } from "../../conf/GlobalConf";
 class CartaoService {
   static async create(obj) {
     let res = null;
-
     await Http.post("/api/cartao", obj).then((response) => {
-      res = response.data;
-    });
+      res = response.data;    });
+
+    return res;
+  }
+
+  static async trocarSenhaCartao(obj) {
+    let res = null;
+    await Http.post("/api/trocarsenhacartao", obj).then((response) => {
+      res = response.data;    });
 
     return res;
   }

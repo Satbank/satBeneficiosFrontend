@@ -70,14 +70,13 @@ function CadastroComercio() {
         );
         reset();
       })
-      .catch((error) => {
-       
+      .catch((error) => {  
         dispatch(changeloading({ open: false }));
         dispatch(
           changeNotify({
             open: true,
             class: "error",
-            msg:  error.response.data.message
+            msg:  error.response.data.error
           })
         );
       });

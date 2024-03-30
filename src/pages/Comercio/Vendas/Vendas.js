@@ -29,6 +29,7 @@ function Vendas() {
 
   const handleModalClose = () => {
     setIsModalOpen(false);
+    reset();
   };
 
   let paperWidth = '40%'; // Padrão para telas grandes  

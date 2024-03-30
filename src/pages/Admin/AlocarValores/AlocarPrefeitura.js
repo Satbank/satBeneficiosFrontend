@@ -45,34 +45,35 @@ function AlocarPrefeitura() {
 
 
   function handleSubmit(data) {
-    dispatch(
-      changeloading({
-        open: true,
-        msg: "carregando..."
-      })
-    );
-    AlocarService.create(data)
-      .then(() => {
-        dispatch(changeloading({ open: false }));
-        dispatch(
-          changeNotify({
-            open: true,
-            class: "success",
-            msg: 'Valor alocado com sucesso !'
-          })
-        );
-        reset();      
-      })
-      .catch((error) => {
-        dispatch(changeloading({ open: false }));    
-        dispatch(
-          changeNotify({
-            open: true,
-            class: "error",
-            msg: error.response.data.error
-          })
-        );
-      });
+    console.log(data)
+    // dispatch(
+    //   changeloading({
+    //     open: true,
+    //     msg: "carregando..."
+    //   })
+    // );
+    // AlocarService.create(data)
+    //   .then(() => {
+    //     dispatch(changeloading({ open: false }));
+    //     dispatch(
+    //       changeNotify({
+    //         open: true,
+    //         class: "success",
+    //         msg: 'Valor alocado com sucesso !'
+    //       })
+    //     );
+    //     reset();      
+    //   })
+    //   .catch((error) => {
+    //     dispatch(changeloading({ open: false }));    
+    //     dispatch(
+    //       changeNotify({
+    //         open: true,
+    //         class: "error",
+    //         msg: error.response.data.error
+    //       })
+    //     );
+    //   });
   };
 
   const headers = [

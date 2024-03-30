@@ -22,7 +22,7 @@ import GeradorNumeros from '../../../utils/GeradorNumeros'
 
 const schema = yup.object({
   users_id: yup.string().required('O campo é obrigatório!').min(3, 'no minimo 3 caracteres'),
-  numero_cartao: yup.string().required('O campo é obrigatório!').min(16, 'no minimo 16 caracteres'),
+  //numero_cartao  : yup.string().required('O campo é obrigatório!').min(16, 'no minimo 16 caracteres'),
   tipo_cartao: yup.string().required('O campo é obrigatório!'),
   status: yup.string(),
   senha: yup.string().required('O campo é obrigatório!').min(6, 'Deve ter no minimo 6 caracteries')
@@ -33,8 +33,16 @@ const schema = yup.object({
 
 
 function CadastroCartoes() {
-  const { register, handleSubmit: onSubmit, formState: { errors }, setValue, reset } = useForm({ resolver: yupResolver(schema) });
-  ;
+  const { register, handleSubmit: onSubmit, formState: { errors }, setValue, reset } = useForm({
+    resolver: yupResolver(schema),
+    defaultValues: {
+      users_id: '',
+      numero_cartao: '',
+      senha: '',
+      // ... outros campos
+    },
+  });
+
   const dispatch = useDispatch();
   const [tipoSelecionado, setTipoSelecionado] = useState('cesta_basica');
   const [status, setStatus] = useState('ativo');
@@ -78,7 +86,8 @@ function CadastroCartoes() {
 
 
   function handleSubmit(data) {
-    let newData = { ...data, users_id: selectedId }
+    let newData = { ...data, users_id: selectedId, numero_cartao: numeroCartaoGerado };
+
     dispatch(
       changeloading({
         open: true,
@@ -95,19 +104,31 @@ function CadastroCartoes() {
             msg: 'Cartão cadastrado com sucesso !'
           })
         );
-        reset();
+
+        // Resetar manualmente os valores dos campos
+        setValue('users_id', '');
+        setValue('numero_cartao', '');
+        setValue('senha', '');
       })
       .catch((error) => {
         dispatch(changeloading({ open: false }));
+        let errorMessage = "";
+
+        if (error.response.data.errors && error.response.data.errors.numero_cartao) {
+          errorMessage = error.response.data.errors.numero_cartao[0];
+        } else {
+          errorMessage = error.response.data.message || "Erro desconhecido";
+        }
 
         dispatch(
           changeNotify({
             open: true,
             class: "error",
-            msg: error.response.data.error
+            msg: errorMessage
           })
         );
       });
+
   };
 
   const handleGenerateCard = () => {
@@ -136,6 +157,17 @@ function CadastroCartoes() {
     // Preenche o campo de senha com os 6 primeiros dígitos do CPF
     setValue('senha', sixDigitsCpf, { shouldValidate: true });
   };
+
+
+
+  useEffect(() => {
+    const currentDate = new Date();
+    const fourYearsLater = new Date(currentDate.getFullYear() + 4, currentDate.getMonth(), currentDate.getDate());
+    const formattedDate = `${fourYearsLater.getDate().toString().padStart(2, '0')}/${(fourYearsLater.getMonth() + 1).toString().padStart(2, '0')}/${fourYearsLater.getFullYear()}`;
+    setDataValidade(formattedDate);
+    setValue('data_validade', formattedDate);
+  }, []);
+
   return (
     <Box>
       <Box component={Paper} padding={2} marginBottom={5}>
@@ -274,7 +306,9 @@ function CadastroCartoes() {
                       setValue("data_validade", maskedValue, { shouldValidate: true });
                     }}
                   />
+                  <Typography variant='subtitle2'>{errors?.data_validade?.message}</Typography>
                 </Grid>
+
 
                 <Grid item xs={12} md={12}>
                   <Box marginTop={2} textAlign="center">
@@ -348,7 +382,7 @@ function CadastroCartoes() {
               color='#150A59!important'
               sx={{
                 position: 'absolute',
-                bottom: '58px',              
+                bottom: '58px',
                 left: '18px',
                 fontWeight: 'bold',
 

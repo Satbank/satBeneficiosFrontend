@@ -11,17 +11,17 @@ function DashboardComercio() {
     <Box>
       <Grid container spacing={2} >
 
-        <Grid item xs={12} md={12} lg={7}>
+        <Grid item xs={12} md={12} lg={12}>
           <CardBemVindo />
         </Grid>
+    
 
-
-        <Grid item xs={12} md={5} lg={3}>
-          <CardFotoSatBank />
+        <Grid item xs={12} md={8}  lg={4} >
+          <CardTotalVendasComercios/>
         </Grid>
 
-        <Grid item xs={12} md={8}  lg={3} >
-          <CardTotalVendasComercios/>
+        <Grid item xs={12} md={5} lg={4}>
+          <CardFotoSatBank />
         </Grid>
 
         <Grid item xs={12} md={8}>

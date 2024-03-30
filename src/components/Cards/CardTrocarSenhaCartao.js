@@ -1,29 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { Box, CardContent, Icon, Paper, Typography,  } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, CardContent,  Icon,  Paper, Typography } from '@mui/material';
 import CreditCard from '@mui/icons-material/CreditCard';
 import { Link as RouterLink } from 'react-router-dom';
-import { TotalMes } from '../../services';
-import CountUp from 'react-countup';
 
+// import { Container } from './styles';
 
-
-
-function CardTotalCartoes() {
-  const [totalcartoes, setTotalCartoes] = useState([])
+function CardTrocarSenha() {
   const [isMouseOver, setIsMouseOver] = useState(false);
-
-  async function getTotalCartoes() {
-    const res = await TotalMes.getTotalCartoes();
-    if (res)   
-    setTotalCartoes(res)
-  }
-  useEffect(() => {
-    getTotalCartoes();
-  }, [])
-
   return (
     <CardContent >
-      <RouterLink to="/todosCartoes" style={{ textDecoration: 'none' }}>
+      <RouterLink to="/trocarsenhacartao" style={{ textDecoration: 'none' }}>
         <Box
           component={Paper}
           elevation={5}
@@ -59,22 +45,31 @@ function CardTotalCartoes() {
               fontSize: '20px!important',
 
             }}
-          >Total cartões ativos </Typography>
-
+          >Trocar senha  </Typography>        
           <Typography variant='h3'
             sx={{
-              color: '#D26806',
+              color: 'white',
               position: 'absolute',
-              top: '60px',
-              left: '72px',
-              fontSize: '35px!important',
+              top: '55px',
+              left: '12px',
+              fontSize: '20px!important',
 
             }}
-          ><CountUp end={totalcartoes} /></Typography>
+          >do</Typography>        
+          <Typography variant='h3'
+            sx={{
+              color: 'white',
+              position: 'absolute',
+              top: '95px',
+              left: '12px',
+              fontSize: '20px!important',
+
+            }}
+          >cartao</Typography>        
         </Box>
       </RouterLink>
     </CardContent>
   )
 }
 
-export default CardTotalCartoes;
+export default CardTrocarSenha;
